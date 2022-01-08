@@ -1,0 +1,19 @@
+{
+  "name": "berintmoffett-com",
+  "version": "1.0.0",
+  "description": "Personal webserver",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shakesbeare/berintmoffett-com.git"
+  },
+  "author": "Berint Moffett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shakesbeare/berintmoffett-com/issues"
+  },
+  "homepage": "https://github.com/shakesbeare/berintmoffett-com#readme"
+}
