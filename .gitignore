@@ -1,2 +1,4 @@
 start
 env/
+node_modules/
+instance/
