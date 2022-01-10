@@ -38,6 +38,6 @@ app.get('/arcane-p2e', function (req, res) {
     res.sendFile('arcane-p2e.html', options);
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`App listening at http://localhost:${port}`)
 })
