@@ -1,0 +1,49 @@
+.SubNavBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top: 50px;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(53, 51, 51);
+}
+
+.SubNavBar li {
+    float: left;
+    background-color: rgb(53, 51, 51) ;
+}
+
+.SubNavBar li a {
+    display: block;
+    padding: 16px;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+}
+
+.SubNavBar li a:hover {
+    background-color: black;
+}
+
+.SubPageBody {
+    padding: 90px 5px;
+}
+
+@media all and (min-width: 1000px) {
+    .text {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+@media all and (max-width: 999px) {
+    .text {
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+}
+
+.title {
+    text-align:center
+}

@@ -1,4 +1,4 @@
-import "../css/Layout.css"
+import "../css/layout.css"
 
 const About = () => {
     return (

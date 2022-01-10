@@ -1,6 +1,6 @@
 import {Outlet, Link} from "react-router-dom";
 
-import '../css/Layout.css';
+import '../css/layout.css';
 
 function Layout() {
   return (
@@ -10,7 +10,7 @@ function Layout() {
             <ul>
                 <li><Link to="/">HOME</Link></li>
                 <li><Link to="/compositions">COMPOSITIONS</Link></li>
-                <li><Link to="/tabletop-gaming">TABLETOP GAMING</Link></li>
+                <li><Link to="/tabletop-rpg">TABLETOP RPG</Link></li>
                 <li><Link to="/about-me">ABOUT ME</Link></li>
             </ul>
             </div>
