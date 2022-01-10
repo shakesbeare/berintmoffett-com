@@ -22,12 +22,12 @@ app.get('/static/css/arcane-p2e.css', function(req, res){
     res.sendFile('/static/css/arcane-p2e.css', options);
 })
 
-app.get('/static/images/piltover-long.jpeg', function(req, res) {
+app.get('/static/images/:image', function(req, res) {
     var options = {
         root: path.join(__dirname)
     }
 
-    res.sendFile('/static/images/piltover-long.jpeg', options);
+    res.sendFile(`/static/images/${req.params['image']}`, options)
 })
 
 app.get('/arcane-p2e', function (req, res) {
