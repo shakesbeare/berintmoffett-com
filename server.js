@@ -3,8 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { nextTick } = require('process');
 const app = express();
-const address = '192.168.0.15';
-const port = 5000;
+const port = 80;
 
 app.use(function(req, res, next){
     console.log(`${req.ip} GET ${req.url}`);
@@ -39,6 +38,6 @@ app.get('/arcane-p2e', function (req, res) {
     res.sendFile('arcane-p2e.html', options);
 })
 
-app.listen(port, address, () => {
+app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 })
