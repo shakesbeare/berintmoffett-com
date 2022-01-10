@@ -9,7 +9,7 @@ const Strixhaven = () => {
                 <h4>Using Dungeons & Dragons 5e</h4>
             </div>
             <div className='text'>
-                <p><strong>Next Meeting: </strong>Tuesday, January 10</p>
+                <p><strong>Next Meeting: </strong>Tuesday, January 11 @ 9:00am</p>
                 <p>Strixhaven University is comprised of 5 colleges which represent the pinnacle of magical education. </p>
                 <ul>
                     <li>Lorehold: History</li>
