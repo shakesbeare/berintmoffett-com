@@ -1,8 +1,7 @@
 {
-  "name": "berintmoffett-com",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -11,9 +10,8 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-favicon": "^0.0.25",
-    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "sqlite3": "^5.0.2",
     "web-vitals": "^2.1.3"
   },
   "scripts": {
@@ -39,8 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-router-dom": "^6.2.1"
   }
 }
