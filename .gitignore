@@ -5,6 +5,8 @@ instance/# See https://help.github.com/articles/ignoring-files/ for more about i
 
 # dependencies
 /node_modules
+/client/node_modules
+/server/node_modules
 /.pnp
 .pnp.js
 

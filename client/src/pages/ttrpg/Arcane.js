@@ -1,5 +1,4 @@
 import "../../css/ttrpg.css";
-import View from 'react';
 
 const Arcane = () => {
     return (
@@ -51,6 +50,7 @@ const Arcane = () => {
                     <hr />             
                     <h1 className='title'>Coming Soon...</h1>
                     <h2 className='title'>Beginning spring term 2022!</h2>
+                    <hr />
                 </div>
             </div>
         </div>
