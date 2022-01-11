@@ -3,6 +3,8 @@ import { Outlet, Link } from 'react-router-dom';
 import "../css/layout.css";
 import "../css/ttrpg.css"
 
+const variableString = 'Hello, World!'
+
 const RPGNavBar = () => {
     return (
         <>

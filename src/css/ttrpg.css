@@ -47,3 +47,9 @@
 .title {
     text-align:center
 }
+
+.hairline {
+    background-color: #A2A2A2;
+    height: 2;
+    width: 165;
+}

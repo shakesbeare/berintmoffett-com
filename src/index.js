@@ -5,6 +5,7 @@ import DocumentTitle from 'react-document-title';
 import Favicon from 'react-favicon'
 
 import Layout from "./pages/Layout";
+import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Compositions from "./pages/Compositions";
 import TTRPG from "./pages/TTRPG";
@@ -22,6 +23,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='*' element={<NotFound />} />
           <Route path="compositions" element={<Compositions />} />
           
           <Route path="tabletop-rpg" element={<TTRPG />}>
