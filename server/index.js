@@ -13,3 +13,8 @@ app.listen(PORT, () => {
 app.get('/api', (req, res) => {
     res.json({message: "Hello from the server!"});
 })
+
+// This must be defined last!
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, "/../client/build/index.html"))
+})
