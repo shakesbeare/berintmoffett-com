@@ -1,14 +1,10 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-// import db
-// import blog
 
 const PORT: string = process.env.PORT || "3001";
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// new dbApi
-// new blogApi
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
