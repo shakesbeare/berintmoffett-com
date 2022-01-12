@@ -2,6 +2,7 @@ start
 env/
 node_modules/
 instance/# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+website.old/
 
 # dependencies
 /node_modules
