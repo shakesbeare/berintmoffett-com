@@ -5,9 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "npm run compile && node ./build/server.js",
-    "compile": "tsc -outDir build",
-    "build": "cd client && npm install && npm run build"
+    "start": "node ./build/server.js",
+    "build": "tsc --outDir build && cd client && npm install && npm run build"
   },
   "author": "Berint Moffett",
   "license": "ISC",

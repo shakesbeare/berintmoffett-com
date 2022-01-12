@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "../css/layout.css"
 
 const About: React.FC = () => {
-    const [data, setState] = React.useState<string | null>(null);
+    const [data, setState] = useState<string | null>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch('/api')
         .then((res) => res.json())
         .then((data) => setState(data.message));

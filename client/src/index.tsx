@@ -14,8 +14,6 @@ import Arcane from "./pages/ttrpg/Arcane"
 import Strixhaven from "./pages/ttrpg/Strixhaven"
 import './css/index.css';
 
-import reportWebVitals from './reportWebVitals';
-
 // This is the router for the  main navbar
 const Router: React.FC = () => {
   return (
@@ -45,8 +43,8 @@ const Router: React.FC = () => {
 const App: React.FC = () => {
   return (
     <div>
-      <Favicon url='../public/favicon.ico' />
-      <DocumentTitle title='Berint Moffett - Home'>
+      <Favicon url='favicon.ico' />
+      <DocumentTitle title='Berint Moffett'>
         <Router />
       </DocumentTitle>    
     </div>
@@ -56,5 +54,3 @@ const App: React.FC = () => {
 export default App;
 
 ReactDOM.render(<App />, document.getElementById('root'))
-
-reportWebVitals();
