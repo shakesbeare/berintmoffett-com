@@ -2,6 +2,11 @@ start
 env/
 node_modules/
 instance/# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+<<<<<<< HEAD
+=======
+website.old/
+/build
+>>>>>>> RefactorToTypeScript
 shared-files/
 
 # dependencies

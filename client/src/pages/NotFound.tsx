@@ -1,6 +1,7 @@
+import React from 'react';
 import "../css/layout.css"
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
     return (
         <div className='PageBody'>
             <h1>Page not found.</h1>

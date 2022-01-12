@@ -1,8 +1,9 @@
+import React from 'react'
 import "../css/layout.css"
 
-const Compositions = () => {
+const Compositions: React.FC = () => {
     return (
-        <div class="PageBody">
+        <div className="PageBody">
             <p>Nothing here yet!</p>
         </div>
     )

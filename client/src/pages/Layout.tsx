@@ -1,8 +1,9 @@
+import React from 'react';
 import {Outlet, Link} from "react-router-dom";
 
 import '../css/layout.css';
 
-function Layout() {
+const Layout: React.FC = () => {
   return (
       <>
         <nav>

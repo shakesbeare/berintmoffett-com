@@ -1,11 +1,10 @@
+import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
 import "../css/layout.css";
 import "../css/ttrpg.css"
 
-const variableString = 'Hello, World!'
-
-const RPGNavBar = () => {
+const RPGNavBar: React.FC = () => {
     return (
         <>
             <nav>

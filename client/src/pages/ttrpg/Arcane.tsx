@@ -1,6 +1,7 @@
+import React from 'react';
 import "../../css/ttrpg.css";
 
-const Arcane = () => {
+const Arcane: React.FC = () => {
     return (
         <div className="SubPageBody">
             <div className='ArcanePage'>

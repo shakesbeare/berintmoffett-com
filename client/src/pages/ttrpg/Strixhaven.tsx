@@ -1,6 +1,7 @@
-import "../../css/ttrpg.css"
+import React from 'react';
+import "../../css/ttrpg.css";
 
-const Strixhaven = () => {
+const Strixhaven: React.FC = () => {
     return (
         <div className="SubPageBody">
             <div className='title'>
