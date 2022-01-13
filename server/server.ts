@@ -4,7 +4,8 @@ import { fileURLToPath } from "url";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import apiRouter from "./api-router.js";
+import pool from "./db";
+import { QueryResult } from "pg";
 
 const PORT: string = process.env.PORT || "3001";
 const app = express();
@@ -19,7 +20,6 @@ app.use(
     })
 );
 app.use(cookieParser());
-app.use("/", apiRouter);
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from the server! " });
@@ -27,6 +27,18 @@ app.get("/api", (req, res) => {
 
 app.get("/api/hello", (req, res) => {
     res.json("Hello, World!");
+});
+
+app.get("/api/get/allposts", (req, res, next) => {
+    var board = req.query.blog;
+    pool.query(
+        `SELECT * FROM posts WHERE board = ?
+    ORDER BY date_created DESC`,
+        [board],
+        (q_err: Error, q_res: QueryResult) => {
+            res.json(q_res.rows);
+        }
+    );
 });
 
 app.get("/favicon.ico", (req, res) => {
