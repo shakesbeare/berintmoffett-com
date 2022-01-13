@@ -86,7 +86,6 @@ router.put("/api/put/post", (req, res, next) => {
         WHERE pid = $4`,
         values,
         (q_err: any, q_res: any) => {
-            console.log(q_res);
             console.log(q_err);
         }
     );
@@ -118,7 +117,6 @@ router.put("/api/put/likes", (req, res, next) => {
         values,
         (q_err: any, q_res: any) => {
             if (q_err) return next(q_err);
-            console.log(q_res);
             res.json(q_res.rows);
         }
     );
@@ -162,14 +160,12 @@ router.put("/api/put/commenttodb", (req, res, next) => {
         values,
         (q_err: any, q_res: any) => {
             res.json(q_res.rows);
-            console.log(q_err);
         }
     );
 });
 
 router.delete("/api/delete/comment", (req, res, next) => {
     const cid = req.body.comment_id;
-    console.log(cid);
 
     pool.query(
         `DELETE FROM comments
@@ -219,7 +215,6 @@ router.post("/api/posts/userprofiletodb", (req, res, next) => {
 
 router.get("/api/get/userprofilefromdb", (req, res, next) => {
     const email = req.query.email;
-    console.log(email);
 
     pool.query(
         `SELECT * FROM users
@@ -233,7 +228,6 @@ router.get("/api/get/userprofilefromdb", (req, res, next) => {
 
 router.get("/api/get/alluserposts", (req, res, next) => {
     const user_id = req.query.user_id;
-    console.log(user_id);
 
     pool.query(
         `SELECT * FROM posts

@@ -19,6 +19,8 @@ app.use(
     })
 );
 app.use(cookieParser());
+
+// Imported routers
 app.use("/", apiRouter);
 
 app.get("/favicon.ico", (req, res) => {
