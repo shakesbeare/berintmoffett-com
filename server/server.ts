@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import apiRouter from "./api-router.js";
 
 const PORT: string = process.env.PORT || "3001";
 const app = express();
@@ -18,6 +19,7 @@ app.use(
     })
 );
 app.use(cookieParser());
+app.use("/", apiRouter);
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from the server! " });
