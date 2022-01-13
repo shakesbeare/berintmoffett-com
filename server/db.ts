@@ -1,4 +1,5 @@
-import { Pool } from "pg";
+import pkg from "pg";
+const { Pool } = pkg;
 
 const pool = new Pool({
     user: "webserver",
@@ -8,4 +9,4 @@ const pool = new Pool({
     port: 5432,
 });
 
-export default { pool };
+export { pool };

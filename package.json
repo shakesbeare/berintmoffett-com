@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node ./build/server.js",
     "quick": "tsc --outDir build",
-    "build": "tsc --outDir build && cd client && npm install && npm run build"
+    "build": "tsc --outDir build && cd client && npm install && npm run build",
+    "autotsc": "tsc --outDir build -w"
   },
   "author": "Berint Moffett",
   "license": "ISC",
