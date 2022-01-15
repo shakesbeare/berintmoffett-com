@@ -23,12 +23,12 @@ app.use(cookieParser());
 // Imported routers
 app.use("/", apiRouter);
 
-app.get("/favicon.ico", (req, res) => {
+app.get("/favicon.ico", (req: any, res: any) => {
     res.sendFile(path.join(__dirname, "../client/build/favicon.ci"));
 });
 
 // This has to be last
-app.get("/*", (req, res) => {
+app.get("/*", (req: any, res: any) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
