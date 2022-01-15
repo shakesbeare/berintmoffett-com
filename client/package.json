@@ -6,14 +6,22 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/auth0-js": "^9.14.5",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.19",
     "@types/react-dom": "^17.0.11",
+<<<<<<< HEAD
     "@types/react-router-dom": "^5.3.2",
+=======
+    "@types/react-router": "^5.1.17",
+    "auth0-js": "^9.18.0",
+    "axios": "^0.24.0",
+>>>>>>> ImplementDatabases
     "react": "^17.0.2",
     "react-document-title": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-favicon": "^0.0.25",
+    "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "typescript": "^4.5.4",
@@ -44,7 +52,11 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@types/react": "^17.0.38",
+=======
+    "@types/axios": "^0.14.0",
+>>>>>>> ImplementDatabases
     "@types/react-document-title": "^2.0.5"
   }
 }
