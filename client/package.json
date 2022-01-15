@@ -49,11 +49,8 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@types/react": "^17.0.38",
-=======
     "@types/axios": "^0.14.0",
->>>>>>> ImplementDatabases
     "@types/react-document-title": "^2.0.5"
   }
 }
