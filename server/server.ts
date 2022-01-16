@@ -33,15 +33,8 @@ const credentials = {
 };
 
 // Determine port
-let PORT: string;
-let httpsPORT: string;
-if (ENV == "test") {
-    PORT = "3000";
-    httpsPORT = "3001";
-} else {
-    PORT = "3001";
-    httpsPORT = "3002";
-}
+let PORT: string = "3001";
+let httpsPORT: string = "3002";
 
 // Setup app
 const app = express();
