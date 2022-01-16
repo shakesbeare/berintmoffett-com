@@ -33,10 +33,13 @@ const credentials = {
 
 // Determine port
 let PORT: string;
+let httpsPORT: string;
 if (ENV == "test") {
     PORT = "3000";
+    httpsPORT = "3001";
 } else {
     PORT = "3001";
+    httpsPORT = "3002";
 }
 
 // Setup app
@@ -70,12 +73,10 @@ app.get("/*", (req: any, res: any) => {
 
 // Start server
 
-if (ENV == "test") {
-    app.listen(PORT, () => {
-        console.log(`Testing server listening on ${PORT}`);
-    });
-} else {
-    httpsApp.listen(PORT, () => {
-        console.log(`HTTPS server listening on ${PORT}`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`Testing server listening on ${PORT}`);
+});
+
+httpsApp.listen(PORT, () => {
+    console.log(`HTTPS server listening on ${PORT}`);
+});
