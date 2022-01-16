@@ -21,7 +21,7 @@ const RPGNavBar: React.FC = () => {
     );
 }
 
-const TTRPG = () => {
+const TTRPGNavBar = () => {
     return (
         <>
             <RPGNavBar />
@@ -29,4 +29,4 @@ const TTRPG = () => {
     )
 };
 
-export default TTRPG;
+export default TTRPGNavBar;

@@ -1,0 +1,45 @@
+.Login {
+    width: 300px;
+    height: 150px;
+
+    position: absolute;
+    top: 30%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    padding: 32px;
+}
+
+.fieldTitle {
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.field {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(53, 51, 51);
+    box-sizing: border-box;
+}
+
+.loginSubmit {
+    border: none;
+    margin: 8x 0;
+    padding: 14px 20px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    width: 100%;
+    background-color: rgb(53, 51, 51);
+    color: white;
+}
+
+.loginSubmit:hover {
+    background-color: rgb(20, 20, 20);
+}

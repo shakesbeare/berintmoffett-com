@@ -4,14 +4,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Favicon from 'react-favicon'
 
-import Layout from "./pages/Layout";
+import NavBar from "./pages/NavBar";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Compositions from "./pages/Compositions";
-import TTRPG from "./pages/TTRPG";
+import TTRPGNavBar from "./pages/TTRPGNavBar";
 import About from "./pages/About";
 import Arcane from "./pages/ttrpg/Arcane"
 import Strixhaven from "./pages/ttrpg/Strixhaven"
+import Login from "./pages/Login";
 import './css/index.css';
 
 // This is the router for the  main navbar
@@ -19,17 +20,18 @@ const Router: React.FC = () => {
   return (
 <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
           <Route path='*' element={<NotFound />} />
           <Route path="compositions" element={<Compositions />} />
           
-          <Route path="tabletop-rpg" element={<TTRPG />}>
+          <Route path="tabletop-rpg" element={<TTRPGNavBar />}>
             <Route path="arcane" element={<Arcane />} />
             <Route path="strixhaven" element={<Strixhaven />} />
 
           </Route>
           <Route path="about-me" element={<About />} />
+          <Route path='login' element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
