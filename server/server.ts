@@ -33,7 +33,7 @@ app.set("trust proxy", "loopback");
 const httpApp = http.createServer(app);
 
 // Imported routers
-app.use("/", apiRouter);
+app.use("/api", apiRouter);
 
 // Setup basic routing
 app.get("/favicon.ico", (req: any, res: any) => {

@@ -5,11 +5,11 @@ const router = express.Router();
 /* 
     TOYS
 */
-router.get("/api", (req, res) => {
+router.get("/", (req, res) => {
     res.json({ message: "Hello from the server! " });
 });
 
-router.get("/api/hello", (req, res) => {
+router.get("/hello", (req, res) => {
     res.json({ message: "Hello, World!" });
 });
 
@@ -17,7 +17,7 @@ router.get("/api/hello", (req, res) => {
     POSTS ROUTING
 */
 
-router.get("/api/get/allposts", (req, res, next) => {
+router.get("/get/allposts", (req, res, next) => {
     if (req.query.board) {
         var board = req.query.board;
         pool.query(
@@ -39,7 +39,7 @@ router.get("/api/get/allposts", (req, res, next) => {
     }
 });
 
-router.get("/api/get/post", (req, res, next) => {
+router.get("/get/post", (req, res, next) => {
     const post_id = req.query.post_id;
 
     pool.query(
@@ -52,7 +52,7 @@ router.get("/api/get/post", (req, res, next) => {
     );
 });
 
-router.post("/api/post/posttodb", (req, res, next) => {
+router.post("/post/posttodb", (req, res, next) => {
     const values = [
         req.body.title,
         req.body.body,
@@ -71,7 +71,7 @@ router.post("/api/post/posttodb", (req, res, next) => {
     );
 });
 
-router.put("/api/put/post", (req, res, next) => {
+router.put("/put/post", (req, res, next) => {
     const values = [
         req.body.title,
         req.body.body,
@@ -91,7 +91,7 @@ router.put("/api/put/post", (req, res, next) => {
     );
 });
 
-router.delete("/api/delete/post", (req, res, next) => {
+router.delete("/delete/post", (req, res, next) => {
     const post_id = req.body.post_id;
     pool.query(
         `DELETE FROM posts WHERE pid=$1`,
@@ -103,7 +103,7 @@ router.delete("/api/delete/post", (req, res, next) => {
     );
 });
 
-router.put("/api/put/likes", (req, res, next) => {
+router.put("/put/likes", (req, res, next) => {
     const uid = [req.body.uid];
     const post_id = String(req.body.post_id);
 
@@ -126,7 +126,7 @@ router.put("/api/put/likes", (req, res, next) => {
     COMMENT ROUTES SECTION
 */
 
-router.post("/api/post/commenttodb", (req, res, next) => {
+router.post("/post/commenttodb", (req, res, next) => {
     const values = [
         req.body.comment,
         req.body.user_id,
@@ -145,7 +145,7 @@ router.post("/api/post/commenttodb", (req, res, next) => {
     );
 });
 
-router.put("/api/put/commenttodb", (req, res, next) => {
+router.put("/put/commenttodb", (req, res, next) => {
     const values = [
         req.body.comment,
         req.body.user_id,
@@ -164,7 +164,7 @@ router.put("/api/put/commenttodb", (req, res, next) => {
     );
 });
 
-router.delete("/api/delete/comment", (req, res, next) => {
+router.delete("/delete/comment", (req, res, next) => {
     const cid = req.body.comment_id;
 
     pool.query(
@@ -178,7 +178,7 @@ router.delete("/api/delete/comment", (req, res, next) => {
     );
 });
 
-router.get("/api/get/allpostcomments", (req, res, next) => {
+router.get("/get/allpostcomments", (req, res, next) => {
     const post_id = String(req.query.post_id);
 
     pool.query(
@@ -195,7 +195,7 @@ router.get("/api/get/allpostcomments", (req, res, next) => {
     USER PROFILE SECTION
 */
 
-router.post("/api/posts/userprofiletodb", (req, res, next) => {
+router.post("/posts/userprofiletodb", (req, res, next) => {
     const values = [
         req.body.profile.nickname,
         req.body.profile.email,
@@ -213,7 +213,7 @@ router.post("/api/posts/userprofiletodb", (req, res, next) => {
     );
 });
 
-router.get("/api/get/userprofilefromdb", (req, res, next) => {
+router.get("/get/userprofilefromdb", (req, res, next) => {
     const email = req.query.email;
 
     pool.query(
@@ -226,7 +226,7 @@ router.get("/api/get/userprofilefromdb", (req, res, next) => {
     );
 });
 
-router.get("/api/get/alluserposts", (req, res, next) => {
+router.get("/get/alluserposts", (req, res, next) => {
     const user_id = req.query.user_id;
 
     pool.query(
@@ -240,7 +240,7 @@ router.get("/api/get/alluserposts", (req, res, next) => {
 });
 
 // Get other user's profile from username
-router.get("/api/get/otheruserprofilefromdb", (req, res, next) => {
+router.get("/get/otheruserprofilefromdb", (req, res, next) => {
     const username = String(req.query.username);
 
     pool.query(
@@ -253,7 +253,7 @@ router.get("/api/get/otheruserprofilefromdb", (req, res, next) => {
 });
 
 // Get other user's posts from username
-router.get("/api/get/otheruserposts", (req, res, next) => {
+router.get("/get/otheruserposts", (req, res, next) => {
     const username = String(req.query.username);
 
     pool.query(
