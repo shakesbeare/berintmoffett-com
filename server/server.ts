@@ -1,6 +1,7 @@
 import fs from "fs";
 import express from "express";
 import https from "https";
+import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
@@ -57,6 +58,7 @@ app.use(cookieParser());
 
 // Setup https app
 const httpsApp = https.createServer(credentials, app);
+const httpApp = http.createServer(app);
 
 // Imported routers
 app.use("/", apiRouter);
@@ -73,7 +75,7 @@ app.get("/*", (req: any, res: any) => {
 
 // Start server
 
-app.listen(PORT, () => {
+httpApp.listen(PORT, () => {
     console.log(`Testing server listening on ${PORT}`);
 });
 
