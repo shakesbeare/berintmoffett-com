@@ -69,9 +69,9 @@ app.get("/*", (req: any, res: any) => {
 // Start server
 
 httpApp.listen(PORT, () => {
-    console.log(`Testing server listening on ${PORT}`);
+    console.log(`HTTP server listening on ${PORT}`);
 });
 
-httpsApp.listen(PORT, () => {
+httpsApp.listen(httpsPORT, () => {
     console.log(`HTTPS server listening on ${httpsPORT}`);
 });
