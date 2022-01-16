@@ -5,6 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "test": "node ./build/server.js test",
     "start": "node ./build/server.js",
     "quick": "tsc --outDir build",
     "build": "tsc --outDir build && cd client && npm install && npm run build",
