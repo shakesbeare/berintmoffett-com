@@ -9,27 +9,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { apiRouter } from "./api-router.js";
 
-// Grab command line arg
-const ENV: string = process.argv[2];
-
-// Certificate
-const privateKey = fs.readFileSync(
-    "/etc/letsencrypt/live/berintmoffett.com/privkey.pem",
-    "utf-8"
-);
-const certificate = fs.readFileSync(
-    "/etc/letsencrypt/live/berintmoffett.com/fullchain.pem",
-    "utf-8"
-);
-// const ca = fs.readFileSync(
-//     "/etc/letsencrypt/live/berintmoffett.com/chain.pem",
-//     "utf-8"
-// );
-
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-};
+const ENV = process.argv[2];
 
 // Determine port
 let httpPORT: string = "3001";
@@ -50,7 +30,6 @@ app.use(cookieParser());
 app.set("trust proxy", "loopback");
 
 // Setup https app
-const httpsApp = https.createServer(credentials, app);
 const httpApp = http.createServer(app);
 
 // Imported routers
@@ -69,9 +48,5 @@ app.get("/*", (req: any, res: any) => {
 // Start server
 
 httpApp.listen(httpPORT, () => {
-    console.log(`HTTP server listening on ${httpPORT}`);
-});
-
-httpsApp.listen(httpsPORT, () => {
-    console.log(`HTTPS server listening on ${httpsPORT}`);
+    console.log(`HTTP server listening on ${httpsPORT}`);
 });
