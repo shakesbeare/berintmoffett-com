@@ -80,5 +80,5 @@ httpApp.listen(PORT, () => {
 });
 
 httpsApp.listen(PORT, () => {
-    console.log(`HTTPS server listening on ${PORT}`);
+    console.log(`HTTPS server listening on ${httpsPORT}`);
 });
