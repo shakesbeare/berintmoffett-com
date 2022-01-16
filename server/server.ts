@@ -47,6 +47,6 @@ app.get("/*", (req: any, res: any) => {
 
 // Start server
 
-httpApp.listen(httpPORT, () => {
+httpApp.listen(httpsPORT, () => {
     console.log(`HTTP server listening on ${httpsPORT}`);
 });
