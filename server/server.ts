@@ -25,11 +25,19 @@ const ca = fs.readFileSync(
     "/etc/letsencrypt/live/berintmoffett.com/chain.pem",
     "utf-8"
 );
+const endString = "-----END CERTIFICATE-----";
+
+function split_ca(): Array<string> {
+    let idx = ca.indexOf(endString);
+    let ca1 = ca.slice(0, idx + endString.length);
+    let ca2 = ca.slice(idx + endString.length + 1, ca.length);
+    return [ca1, ca2];
+}
 
 const credentials = {
     key: privateKey,
     cert: certificate,
-    ca: ca,
+    ca: split_ca(),
 };
 
 // Determine port
