@@ -33,7 +33,7 @@ const credentials = {
 };
 
 // Determine port
-let PORT: string = "3001";
+let httpPORT: string = "3001";
 let httpsPORT: string = "3002";
 
 // Setup app
@@ -48,6 +48,7 @@ app.use(
     })
 );
 app.use(cookieParser());
+app.set("trust proxy", "loopback");
 
 // Setup https app
 const httpsApp = https.createServer(credentials, app);
@@ -68,8 +69,8 @@ app.get("/*", (req: any, res: any) => {
 
 // Start server
 
-httpApp.listen(PORT, () => {
-    console.log(`HTTP server listening on ${PORT}`);
+httpApp.listen(httpPORT, () => {
+    console.log(`HTTP server listening on ${httpPORT}`);
 });
 
 httpsApp.listen(httpsPORT, () => {
