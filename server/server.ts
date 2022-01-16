@@ -5,8 +5,6 @@ import { fileURLToPath } from "url";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import { apiRouter } from "./api-router.js";
-import expressSession from "express-session";
-import connectPg from "connect-pg-simple";
 
 // Grab command line args
 const ENV = process.argv[2];
@@ -34,19 +32,6 @@ app.use(
 );
 // Allow nginx proxy to work
 app.set("trust proxy", "loopback");
-// Enable sessions
-const pgSession = connectPg(expressSession);
-app.use(
-    expressSession({
-        store: new pgSession({
-            conString:
-                "postgres://nodeuser:nodecool1234@localhost:5432/berintmoffettcom",
-        }),
-        secret: process.env.COOKIE_SECRET,
-        resave: false,
-        cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }, // 30 days
-    })
-);
 
 // Setup http app
 const httpApp = http.createServer(app);

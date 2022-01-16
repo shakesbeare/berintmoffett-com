@@ -21,6 +21,10 @@
     float: right;
 }
 
+.button-sort {
+    display: inline-block;
+}
+
 .PageBody {
     padding: 40px 5px;
 }

@@ -13,7 +13,7 @@ import TTRPGNavBar from "./pages/TTRPGNavBar";
 import About from "./pages/About";
 import Arcane from "./pages/ttrpg/Arcane"
 import Strixhaven from "./pages/ttrpg/Strixhaven"
-import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import './css/index.css';
 
 // This is the router for the  main navbar
@@ -32,7 +32,7 @@ const Router: React.FC = () => {
 
           </Route>
           <Route path="about-me" element={<About />} />
-          <Route path='login' element={<Login />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>
