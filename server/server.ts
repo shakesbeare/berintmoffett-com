@@ -11,9 +11,9 @@ import { apiRouter } from "./api-router.js";
 
 const ENV = process.argv[2];
 
-// Determine port
-let httpPORT: string = "3001";
-let httpsPORT: string = "3002";
+// Define ports
+const testingPORT: string = "3001";
+const PORT: string = "3002";
 
 // Setup app
 const app = express();
@@ -46,7 +46,12 @@ app.get("/*", (req: any, res: any) => {
 });
 
 // Start server
-
-httpApp.listen(httpsPORT, () => {
-    console.log(`HTTP server listening on ${httpsPORT}`);
-});
+if (ENV == "test") {
+    httpApp.listen(testingPORT, () => {
+        console.log(`Testing server listening on ${testingPORT}`);
+    });
+} else {
+    httpApp.listen(PORT, () => {
+        console.log(`HTTP server listening on ${PORT}`);
+    });
+}
