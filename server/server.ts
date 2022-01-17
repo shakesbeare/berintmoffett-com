@@ -29,7 +29,7 @@ app.use(
 app.use(cookieParser());
 
 // Allow nginx proxy to work
-app.set("trust proxy", "true");
+app.set("trust proxy", true);
 
 // Setup https app
 const httpApp = http.createServer(app);
