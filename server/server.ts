@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import cloudflareIpRanges from "cloudflare-ip-ranges";
 import { apiRouter } from "./api-router.js";
 
 const ENV = process.argv[2];
@@ -27,7 +28,11 @@ app.use(
     })
 );
 app.use(cookieParser());
-app.set("trust proxy", "loopback");
+
+// Allow nginx and cloudflare proxy to work
+cloudflareIpRanges.updateIPs().then((ips: any) => {
+    app.set("trust proxy", ["loopback", ...ips]);
+});
 
 // Setup https app
 const httpApp = http.createServer(app);
