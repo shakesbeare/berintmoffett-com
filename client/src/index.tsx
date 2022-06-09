@@ -18,20 +18,20 @@ import './css/index.css';
 // This is the router for the  main navbar
 const Router: React.FC = () => {
   return (
-<BrowserRouter>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<NavBar />}>
-          <Route index element={<Home />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path="compositions" element={<Compositions />} />
-          
-          <Route path="tabletop-rpg" element={<TTRPGNavBar />}>
-            <Route path="arcane" element={<Arcane />} />
-            <Route path="strixhaven" element={<Strixhaven />} />
+        <Route path="/" element={ <NavBar /> }>
+          <Route index element={ <Home /> } />
+          <Route path='*' element={ <NotFound /> } />
+          <Route path="compositions" element={ <Compositions /> } />
+
+          <Route path="tabletop-rpg" element={ <TTRPGNavBar /> }>
+            <Route path="arcane" element={ <Arcane /> } />
+            <Route path="strixhaven" element={ <Strixhaven /> } />
 
           </Route>
-          <Route path="about-me" element={<About />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="about-me" element={ <About /> } />
+          <Route path="profile" element={ <Profile /> } />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -48,12 +48,17 @@ const App: React.FC = () => {
       <Favicon url='favicon.ico' />
       <DocumentTitle title='Berint Moffett'>
         <Router />
-      </DocumentTitle>    
+      </DocumentTitle>
     </div>
   )
 }
 
 ReactDOM.render(
+<<<<<<< HEAD
     <App />,
     document.getElementById('root')
+=======
+  < App />,
+  document.getElementById('root')
+>>>>>>> Getting Rust/Rocket app ready for deployment
 )

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5", // Specify ECMAScript target version
+    "outDir": "build",
     "lib": [
       "dom",
       "dom.iterable",
@@ -28,5 +29,8 @@
   "include": [
     "src/**/*" // *** The files TypeScript should type check ***
   ],
-  "exclude": ["node_modules", "build"] // *** The files to not type check ***
+  "exclude": [
+    "node_modules",
+    "build"
+  ] // *** The files to not type check ***
 }

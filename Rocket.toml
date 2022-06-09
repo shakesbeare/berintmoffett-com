@@ -1,0 +1,5 @@
+[default]
+log_level = "normal"
+
+[release]
+port = 3002
