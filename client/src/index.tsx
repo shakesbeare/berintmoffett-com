@@ -54,11 +54,6 @@ const App: React.FC = () => {
 }
 
 ReactDOM.render(
-<<<<<<< HEAD
-    <App />,
-    document.getElementById('root')
-=======
   < App />,
   document.getElementById('root')
->>>>>>> Getting Rust/Rocket app ready for deployment
 )
