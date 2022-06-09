@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Favicon from 'react-favicon'
-import { Auth0Provider } from '@auth0/auth0-react';
 
 import NavBar from "./pages/NavBar";
 import NotFound from "./pages/NotFound";
@@ -55,12 +54,6 @@ const App: React.FC = () => {
 }
 
 ReactDOM.render(
-  <Auth0Provider
-    domain='dev-4diwe6ft.us.auth0.com'
-    clientId='onRQDePHSHOZSerpcOTI2KDFTgi1c2qu'
-    redirectUri={window.location.origin}
-  >
-    <App />
-  </Auth0Provider>,
-document.getElementById('root')
+    <App />,
+    document.getElementById('root')
 )

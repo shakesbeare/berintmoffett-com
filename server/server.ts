@@ -41,7 +41,7 @@ const httpApp = http.createServer(app);
 app.use("/api", apiRouter);
 
 // This has to be the last route specified
-app.get("/*", (req: any, res: any) => {
+app.get("/*", (_req: any, res: any) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
