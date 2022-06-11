@@ -3,7 +3,7 @@ import "../../css/ttrpg.css";
 
 const Strixhaven: React.FC = () => {
     return (
-        <div className="SubPageBody">
+        <div className="TTRPGBody">
             <div className='title'>
                 <h1>STRIXHAVEN: CURRICULUM OF CHAOS</h1>
                 <h3>Created by Wizards of the Coast</h3>
