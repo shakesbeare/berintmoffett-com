@@ -3,7 +3,7 @@ mod utils;
 #[macro_use]
 extern crate rocket;
 
-use crate::utils::{get_posts, Response};
+use crate::utils::{get_all_posts, Response};
 use rocket::fs::{relative, FileServer, NamedFile};
 use rocket::serde::json::Json;
 use rocket::tokio::fs::File;
@@ -43,17 +43,18 @@ async fn get_post(post_name: &str) -> Result<Json<Response>, ()> {
     }
 }
 
-#[get("/test", rank = 1)]
+#[get("/list", rank = 1)]
 async fn list_posts() -> Result<Json<Response>, ()> {
-    Ok(Json(Response::new(format!("{:?}", get_posts()).as_str())))
+    Ok(Json(Response::new(
+        format!("{:?}", get_all_posts()).as_str(),
+    )))
 }
 
 #[launch]
 fn rocket() -> _ {
-    println!("{:?}", get_posts());
+    println!("{:?}", get_all_posts());
     rocket::build()
         .mount("/", routes![catch_all])
-        .mount("/posts", routes![get_post])
+        .mount("/posts", routes![get_post, list_posts])
         .mount("/", FileServer::from(relative!("client/build")).rank(10))
-        .mount("/api", routes![list_posts])
 }

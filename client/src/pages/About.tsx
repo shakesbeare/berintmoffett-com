@@ -6,14 +6,17 @@ const About: React.FC = () => {
 
     const [data, setState] = useState<string | null>(null);
     useEffect(() => {
-        fetch('/api/test')
+        fetch('/posts/list')
             .then((res) => res.json())
             .then((data) => setState(data.content));
     })
+    //@ts-expect-error
+    const post_list = JSON.parse(data);
+    console.log(post_list);
 
     return (
         <div className="PageBody">
-            <ReactMarkdown>{ !data ? "Loading..." : data }</ReactMarkdown>
+            <ReactMarkdown>{ !data ? "Loading..." : post_list[0] + post_list[1] }</ReactMarkdown>
         </div>
     )
 }

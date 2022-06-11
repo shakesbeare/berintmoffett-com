@@ -16,7 +16,7 @@ impl Response {
     }
 }
 
-pub fn get_posts() -> Vec<String> {
+pub fn get_all_posts() -> Vec<String> {
     let cwd = env::current_dir().unwrap();
     println!("{}", cwd.display());
     let mut posts: Vec<String> = Vec::new();
