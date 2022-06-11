@@ -3,3 +3,6 @@ log_level = "normal"
 
 [release]
 port = 3002
+
+[debug]
+port = 3001

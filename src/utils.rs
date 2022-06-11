@@ -20,7 +20,7 @@ pub fn get_all_posts() -> Vec<String> {
     let cwd = env::current_dir().unwrap();
     println!("{}", cwd.display());
     let mut posts: Vec<String> = Vec::new();
-    let paths = fs::read_dir("client/build/posts").unwrap();
+    let paths = fs::read_dir("posts").unwrap();
     for path in paths {
         let path_str = format!("{}", path.unwrap().path().display());
         let name = String::from(FileName::new(&path_str).as_str().unwrap());

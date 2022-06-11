@@ -20,7 +20,7 @@ async fn catch_all() -> Option<NamedFile> {
 #[get("/<post_name>", rank = 5)]
 async fn get_post(post_name: &str) -> Result<Json<Response>, ()> {
     let cwd = env::current_dir().unwrap();
-    let path_to_file = format!("client/build/posts/{}", &post_name);
+    let path_to_file = format!("posts/{}.md", &post_name);
     let path = cwd.join(path_to_file);
 
     let named_file = NamedFile::open(&path).await.ok();
@@ -55,6 +55,6 @@ fn rocket() -> _ {
     println!("{:?}", get_all_posts());
     rocket::build()
         .mount("/", routes![catch_all])
-        .mount("/posts", routes![get_post, list_posts])
+        .mount("/api/posts", routes![get_post, list_posts])
         .mount("/", FileServer::from(relative!("client/build")).rank(10))
 }
