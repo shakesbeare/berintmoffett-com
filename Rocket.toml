@@ -1,5 +1,10 @@
 [default]
 log_level = "normal"
 
+[production]
+port = 3002
+address = "0.0.0.0"
+
 [release]
 port = 3002
+address = "0.0.0.0"
