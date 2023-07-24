@@ -35,7 +35,7 @@ async fn main() -> std::io::Result<()> {
         .filter(None, LevelFilter::Info)
         .init();
 
-    let conf = get_configuration(None).await.unwrap();
+    let mut conf = get_configuration(None).await.unwrap();
     let addr = conf.leptos_options.site_addr;
 
     // Generate the list of routes in your Leptos App
