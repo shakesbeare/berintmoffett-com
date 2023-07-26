@@ -1,25 +1,3 @@
----
-date: July 24, 2023
-tag: music, teaching
-geometry: margin=2cm
----
-
-# Berint Moffett
-
-## Private Music Lessons
-
-## About the Studio
-
-I believe that the best learning is done in a safe, comfortable environment. As
-such, I constantly strive to make my lessons a place where students can be
-themselves. Furthermore, I believe that we learn music fastest when we are
-having fun. Therefore, I try to incorporate music and exercises that students
-will enjoy in there lessons. 
-
-I try to foster a relatable and down-to-earth atmosphere with my students. While
-I will always remain professional, the teachers which have been the most
-successful for me have been those that I was able to make friends with. 
-
 ## Policies
 
 ### Lesson Payment
@@ -28,12 +6,6 @@ Lesson payments are non-refundable. It is preferred that students pay for
 lessons by month, though this is not a requirement. If payment for a lesson is
 not received in a timely manner, I reserve the right to consider the lesson
 cancelled with no notice.
-
-| Duration   | Cost |
-| ---------- | ---- |
-| 30 minutes | $30  |
-| 45 minutes | $35  |
-| 60 minutes | $40  |
 
 ### Cancellations
 
