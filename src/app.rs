@@ -97,6 +97,6 @@ fn NotFound(cx: Scope) -> impl IntoView {
     }
 
     view! { cx,
-        <h1>"404: Page Not Found"</h1>
+        <h3>"Not Found or Not Implemented"</h3>
     }
 }
