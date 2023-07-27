@@ -1,7 +1,8 @@
-pub mod app;
 pub mod about_me;
+pub mod app;
 pub mod compositions;
 pub mod lessons;
+pub mod text_edit;
 
 use cfg_if::cfg_if;
 

@@ -9,10 +9,10 @@ async fn main() -> std::io::Result<()> {
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use leptos_start::app::*;
 
-    use log::{ LevelFilter, Level };
-    use env_logger::Builder;
-    use env_logger::fmt::Color;
     use actix_web::middleware::Logger;
+    use env_logger::fmt::Color;
+    use env_logger::Builder;
+    use log::{Level, LevelFilter};
 
     // env_logger::init_from_env(Env::default().default_filter_or("info"));
     let mut builder = Builder::from_default_env();
@@ -30,12 +30,17 @@ async fn main() -> std::io::Result<()> {
 
             level_style.set_color(color).set_bold(true);
 
-            writeln!(buf, "[{}] - {}", level_style.value(record.level()),  record.args())
+            writeln!(
+                buf,
+                "[{}] - {}",
+                level_style.value(record.level()),
+                record.args()
+            )
         })
         .filter(None, LevelFilter::Info)
         .init();
 
-    let mut conf = get_configuration(None).await.unwrap();
+    let conf = get_configuration(None).await.unwrap();
     let addr = conf.leptos_options.site_addr;
 
     // Generate the list of routes in your Leptos App
@@ -46,7 +51,9 @@ async fn main() -> std::io::Result<()> {
         let site_root = &leptos_options.site_root;
 
         App::new()
-            .wrap(Logger::new("%t: %a - \u{001b}[35m%r \u{001b}[36m%s \u{001b}[37m- %Dms"))
+            .wrap(Logger::new(
+                "%t: %a - \u{001b}[35m%r \u{001b}[36m%s \u{001b}[37m- %Dms",
+            ))
             .route("/api/{tail:.*}", leptos_actix::handle_server_fns())
             // serve JS/WASM/CSS from `pkg`
             .service(Files::new("/pkg", format!("{site_root}/pkg")))

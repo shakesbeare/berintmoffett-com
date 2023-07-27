@@ -21,25 +21,37 @@ pub fn AboutMe(cx: Scope) -> impl IntoView {
     view! { cx,
         <div class="container">
             <div class="row mb-3 p-2">
-                <h1 class="text-center">About Berint</h1>
+                <h1 class="text-center">
+                    About Berint
+                </h1>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <img src="https://www.dl.dropboxusercontent.com/s/gt4delvds8ngm45/Bear%20Moffett.jpg?dl=0" class="img-fluid" alt="Berint Moffett"/>
+                    <img
+                        src="https://www.dl.dropboxusercontent.com/s/gt4delvds8ngm45/Bear%20Moffett.jpg?dl=0"
+                        class="shadow img-fluid"
+                        alt="Berint Moffett"
+                    />
                 </div>
                 <div class="col-md-6">
                     <div class="fs-6">
-                        <Suspense fallback=move || view!{ cx, <p>"Loading..."</p> }.into_view(cx)>
+                        <Suspense fallback=move || {
+                            view! { cx, <p>"Loading..."</p> }.into_view(cx)
+                        }>
                             {move || match about_me.read(cx) {
-                                    Some(res) => {
-                                        let Ok(html) = res else {
-                                            return view!{ cx, <p>"An Error Occurred"</p>}.into_view(cx);
-                                        };
-                                        view!{ cx, <div inner_html=html /> }.into_view(cx)
-                                    }
-                                    None => view!{ cx, <p>"File Not Found"</p> }.into_view(cx)
+                                Some(res) => {
+                                    let Ok(html) = res else {
+                                    return view! { cx, <p>"An Error Occurred"</p> }.into_view(cx);
+                                };
+                                    view! { cx, <div inner_html=html></div> }.into_view(cx)
                                 }
-                            }
+                                None => {
+
+                                    view! { cx, <p>"File Not Found"</p> }
+                                        .into_view(cx)
+                                }
+                            }}
+
                         </Suspense>
                     </div>
                 </div>
