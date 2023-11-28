@@ -1,9 +1,12 @@
 use leptos::*;
 
 #[component]
-pub fn TextEditor(cx: Scope) -> impl IntoView {
-    view! { cx,
-        <div class="container border rounded shadow bg-secondary" style="max-width: 50%;">
+pub fn TextEditor() -> impl IntoView {
+    view! {
+        <div
+            class="container border rounded shadow bg-secondary"
+            style="max-width: 50%;"
+        >
             <div class="row mb-3 p-2">
                 <div class="">
                     <div class="row mb-3 p-2">
@@ -14,6 +17,7 @@ pub fn TextEditor(cx: Scope) -> impl IntoView {
                             placeholder="Enter text here"
                             style="max-width: 75%; min-height: 10rem;"
                             class="form-control"
+                            rows="10"
                         ></textarea>
                     </div>
                 </div>

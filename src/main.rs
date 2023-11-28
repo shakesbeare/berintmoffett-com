@@ -4,17 +4,29 @@ async fn main() -> std::io::Result<()> {
     use std::io::Write;
 
     use actix_files::Files;
-    use actix_web::*;
+    use actix_identity::IdentityMiddleware;
+    use actix_session::{storage::RedisSessionStore, SessionMiddleware};
+    use actix_web::{cookie::Key, *};
     use leptos::*;
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use leptos_start::app::*;
 
     use actix_web::middleware::Logger;
-    use env_logger::fmt::Color;
-    use env_logger::Builder;
+    use env_logger::{fmt::Color, Builder};
+    use leptos_start::database::create_user_tables;
     use log::{Level, LevelFilter};
 
-    // env_logger::init_from_env(Env::default().default_filter_or("info"));
+    let secret_key = Key::generate();
+    let redis_store_res =
+        RedisSessionStore::new("redis://127.0.0.1:6379").await;
+    let redis_store = match redis_store_res {
+        Ok(s) => s,
+        Err(e) => {
+            println!("{}", e);
+            panic!()
+        }
+    };
+    create_user_tables().await.unwrap();
     let mut builder = Builder::from_default_env();
 
     builder
@@ -44,7 +56,7 @@ async fn main() -> std::io::Result<()> {
     let addr = conf.leptos_options.site_addr;
 
     // Generate the list of routes in your Leptos App
-    let routes = generate_route_list(|cx| view! { cx, <App/> });
+    let routes = generate_route_list(|| view! { <App/> });
 
     HttpServer::new(move || {
         let leptos_options = &conf.leptos_options;
@@ -53,6 +65,11 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(Logger::new(
                 "%t: %a - \u{001b}[35m%r \u{001b}[36m%s \u{001b}[37m- %Dms",
+            ))
+            .wrap(IdentityMiddleware::default())
+            .wrap(SessionMiddleware::new(
+                redis_store.clone(),
+                secret_key.clone(),
             ))
             .route("/api/{tail:.*}", leptos_actix::handle_server_fns())
             // serve JS/WASM/CSS from `pkg`
@@ -64,7 +81,7 @@ async fn main() -> std::io::Result<()> {
             .leptos_routes(
                 leptos_options.to_owned(),
                 routes.to_owned(),
-                |cx| view! { cx, <App/> },
+                || view! { <App/> },
             )
             .app_data(web::Data::new(leptos_options.to_owned()))
         //.wrap(middleware::Compress::default())

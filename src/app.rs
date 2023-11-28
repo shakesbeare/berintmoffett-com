@@ -1,19 +1,26 @@
-use leptos::*;
+use leptos::{*, logging::debug_warn};
 use leptos_meta::*;
 use leptos_router::*;
 
-use crate::about_me::AboutMe;
-use crate::lessons::Lessons;
-use crate::text_edit::TextEditor;
+use crate::{about_me::AboutMe, auth::User, lessons::Lessons, navbar::NavBar};
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
-    // Provides context that manages stylesheets, titles, meta tags, etc.
-    provide_meta_context(cx);
+pub fn App() -> impl IntoView {
+    let (user, set_user) = create_signal::<User>(User::default());
+    let login_status = create_resource(
+        || (),
+        move |_| async move {
+            debug_warn!("Getting login status");
+            crate::auth::login_status().await
+        },
+    );
 
-    view! { cx,
-        // injects a stylesheet into the document <head>
-        // id=leptos means cargo-leptos will hot-reload this stylesheet
+    provide_context(login_status);
+    provide_context(user);
+    provide_context(set_user);
+    provide_meta_context(); // Provides context that manages stylesheets, titles, meta tags, etc.
+
+    view! {
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -26,91 +33,42 @@ pub fn App(cx: Scope) -> impl IntoView {
             crossorigin="anonymous"
         ></script>
 
-        // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Berint Moffett - Home"/>
+        <Suspense fallback=move || {
+            view! { <div class="text-center">"Loading..."</div> }
+        }>
+            {move || {
+                let Some(res) = login_status.get() else { return };
+                match res {
+                    Ok(user) => {
+                        set_user.set(user.clone());
+                        provide_context(user);
+                    }
+                    Err(_) => {
+                        set_user.set(User::default());
+                    }
+                }
+            }}
 
-        // content for this welcome page
+        </Suspense>
         <Router>
             <main>
-                <nav class="navbar-dark bg-dark navbar navbar-expand-lg text-light">
-                    <div class="container-fluid shadow-sm">
-                        <a class="navbar-brand text-reset" href="/">
-                            Home
-                        </a>
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                                // navbar items
-                                <li class="nav-item">
-                                    <a
-                                        class="link-secondary nav-link text-reset"
-                                        aria-current="page"
-                                        href="/about-me"
-                                    >
-                                        "About Me"
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="link-secondary nav-link text-reset" href="/lessons">
-                                        "Lessons"
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a
-                                        class="link-secondary nav-link text-reset"
-                                        href="/programming"
-                                    >
-                                        "Programming"
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a
-                                        class="link-secondary nav-link text-reset"
-                                        href="/composition"
-                                    >
-                                        "Composition"
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="link-secondary nav-link text-reset" href="/account">
-                                        "Account"
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <NavBar/>
                 <Routes>
                     <Route path="" view=HomePage/>
                     <Route path="/about-me" view=AboutMe/>
                     <Route path="/lessons" view=Lessons/>
                     <Route path="/*any" view=NotFound/>
+                    <Route path="/text" view=crate::text_edit::TextEditor/>
                 </Routes>
             </main>
         </Router>
     }
 }
 
-/// Renders the home page of your application.
 #[component]
-fn HomePage(cx: Scope) -> impl IntoView {
-    view! { cx,
+fn HomePage() -> impl IntoView {
+    view! {
         <div class="row text-center">
             <h1>"Berint Moffett"</h1>
             <h3>"Performer, Composer, Programmer"</h3>
@@ -120,20 +78,15 @@ fn HomePage(cx: Scope) -> impl IntoView {
 
 /// 404 - Not Found
 #[component]
-fn NotFound(cx: Scope) -> impl IntoView {
-    // set an HTTP status code 404
-    // this is feature gated because it can only be done during
-    // initial server-side rendering
-    // if you navigate to the 404 page subsequently, the status
-    // code will not be set because there is not a new HTTP request
-    // to the server
+fn NotFound() -> impl IntoView {
     #[cfg(feature = "ssr")]
     {
-        // this can be done inline because it's synchronous
-        // if it were async, we'd use a server function
-        let resp = expect_context::<leptos_actix::ResponseOptions>(cx);
+        let resp = expect_context::<leptos_actix::ResponseOptions>();
         resp.set_status(actix_web::http::StatusCode::NOT_FOUND);
     }
 
-    view! { cx, <h3>"Not Found or Not Implemented"</h3> }
+    view! {
+        <Title text="Berint Moffett - 404"/>
+        <h3>"Not Found or Not Implemented"</h3>
+    }
 }

@@ -1,4 +1,5 @@
 use leptos::*;
+use leptos_meta::Title;
 
 use markdown::to_html;
 use std::fs::read_to_string;
@@ -15,15 +16,16 @@ pub async fn get_about_me() -> Result<String, ServerFnError> {
 
 /// The About Me page
 #[component]
-pub fn AboutMe(cx: Scope) -> impl IntoView {
-    let about_me = create_resource(cx, || (), |_| async move { get_about_me().await });
+pub fn AboutMe() -> impl IntoView {
+    let about_me =
+        create_resource(|| (), |_| async move { get_about_me().await });
 
-    view! { cx,
+    view! {
+        <Title text="Berint Moffett - About Me"/>
+
         <div class="container">
             <div class="row mb-3 p-2">
-                <h1 class="text-center">
-                    About Berint
-                </h1>
+                <h1 class="text-center">"About Berint"</h1>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -36,19 +38,20 @@ pub fn AboutMe(cx: Scope) -> impl IntoView {
                 <div class="col-md-6">
                     <div class="fs-6">
                         <Suspense fallback=move || {
-                            view! { cx, <p>"Loading..."</p> }.into_view(cx)
+                            view! { <p>"Loading..."</p> }.into_view()
                         }>
-                            {move || match about_me.read(cx) {
+                            {move || match about_me.get() {
                                 Some(res) => {
                                     let Ok(html) = res else {
-                                    return view! { cx, <p>"An Error Occurred"</p> }.into_view(cx);
+                                    return view! { <p>"An Error Occurred"</p> }
+                                        .into_view();
                                 };
-                                    view! { cx, <div inner_html=html></div> }.into_view(cx)
+                                    view! { <div inner_html=html></div> }.into_view()
                                 }
                                 None => {
 
-                                    view! { cx, <p>"File Not Found"</p> }
-                                        .into_view(cx)
+                                    view! { <p>"File Not Found"</p> }
+                                        .into_view()
                                 }
                             }}
 

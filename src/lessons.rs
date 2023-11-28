@@ -1,4 +1,5 @@
 use leptos::*;
+use leptos_meta::Title;
 use markdown::to_html;
 use std::fs::read_to_string;
 
@@ -23,11 +24,14 @@ pub async fn get_lesson_details() -> Result<String, ServerFnError> {
 }
 /// The Lessons Page
 #[component]
-pub fn Lessons(cx: Scope) -> impl IntoView {
-    let policy_resource = create_resource(cx, || (), |_| async move { get_lesson_policy().await });
-    let about_resource = create_resource(cx, || (), |_| async move { get_lesson_details().await });
+pub fn Lessons() -> impl IntoView {
+    let policy_resource =
+        create_resource(|| (), |_| async move { get_lesson_policy().await });
+    let about_resource =
+        create_resource(|| (), |_| async move { get_lesson_details().await });
 
-    view! { cx,
+    view! {
+        <Title text="Berint Moffett - Lessons"/>
         <div class="container">
             <div class="row mb-3 p-2">
                 <h1 class="text-center">"Private Music Lessons"</h1>
@@ -35,19 +39,20 @@ pub fn Lessons(cx: Scope) -> impl IntoView {
             <div class="row mb-3">
                 <div class="col-md-6">
                     <Suspense fallback=move || {
-                        view! { cx, <p>"Loading..."</p> }.into_view(cx)
+                        view! { <p>"Loading..."</p> }.into_view()
                     }>
-                        {move || match about_resource.read(cx) {
+                        {move || match about_resource.get() {
                             Some(res) => {
                                 let Ok(html) = res else {
-                                return view! { cx, <p>"An Error Occurred"</p> }.into_view(cx);
+                                return view! { <p>"An Error Occurred"</p> }
+                                    .into_view();
                             };
-                                view! { cx, <div inner_html=html></div> }.into_view(cx)
+                                view! { <div inner_html=html></div> }.into_view()
                             }
                             None => {
 
-                                view! { cx, <p>"File Not Found"</p> }
-                                    .into_view(cx)
+                                view! { <p>"File Not Found"</p> }
+                                    .into_view()
                             }
                         }}
 
@@ -55,19 +60,20 @@ pub fn Lessons(cx: Scope) -> impl IntoView {
                 </div>
                 <div class="col-md-6">
                     <Suspense fallback=move || {
-                        view! { cx, <p>"Loading..."</p> }.into_view(cx)
+                        view! { <p>"Loading..."</p> }.into_view()
                     }>
-                        {move || match policy_resource.read(cx) {
+                        {move || match policy_resource.get() {
                             Some(res) => {
                                 let Ok(html) = res else {
-                                return view! { cx, <p>"An Error Occurred"</p> }.into_view(cx);
+                                return view! { <p>"An Error Occurred"</p> }
+                                    .into_view();
                             };
-                                view! { cx, <div inner_html=html></div> }.into_view(cx)
+                                view! { <div inner_html=html></div> }.into_view()
                             }
                             None => {
 
-                                view! { cx, <p>"File Not Found"</p> }
-                                    .into_view(cx)
+                                view! { <p>"File Not Found"</p> }
+                                    .into_view()
                             }
                         }}
 
