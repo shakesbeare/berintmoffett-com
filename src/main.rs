@@ -1,112 +1,61 @@
-#[cfg(feature = "ssr")]
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    use std::io::Write;
+use axum::{
+    response::{Html, IntoResponse},
+    routing::get,
+};
+use dotenv::dotenv;
+use tower_http::trace::TraceLayer;
 
-    use actix_files::Files;
-    use actix_identity::IdentityMiddleware;
-    use actix_session::{storage::RedisSessionStore, SessionMiddleware};
-    use actix_web::{cookie::Key, *};
-    use leptos::*;
-    use leptos_actix::{generate_route_list, LeptosRoutes};
-    use leptos_start::app::*;
+use berintmoffett_com::{STATIC_DIR, static_file};
 
-    use actix_web::middleware::Logger;
-    use env_logger::{fmt::Color, Builder};
-    use leptos_start::database::create_user_tables;
-    use log::{Level, LevelFilter};
-
-    let secret_key = Key::generate();
-    let redis_store_res =
-        RedisSessionStore::new("redis://127.0.0.1:6379").await;
-    let redis_store = match redis_store_res {
-        Ok(s) => s,
-        Err(e) => {
-            println!("{}", e);
-            panic!()
-        }
-    };
-    create_user_tables().await.unwrap();
-    let mut builder = Builder::from_default_env();
-
-    builder
-        .format(|buf, record| {
-            let mut level_style = buf.style();
-
-            let color = match record.level() {
-                Level::Info => Color::Blue,
-                Level::Warn => Color::Yellow,
-                Level::Error => Color::Red,
-                _ => Color::Green,
-            };
-
-            level_style.set_color(color).set_bold(true);
-
-            writeln!(
-                buf,
-                "[{}] - {}",
-                level_style.value(record.level()),
-                record.args()
-            )
-        })
-        .filter(None, LevelFilter::Info)
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::DEBUG)
         .init();
 
-    let conf = get_configuration(None).await.unwrap();
-    let addr = conf.leptos_options.site_addr;
+    dotenv().ok();
 
-    // Generate the list of routes in your Leptos App
-    let routes = generate_route_list(|| view! { <App/> });
+    let address = std::env::var("ADDRESS").expect("ADDRESS must be set");
+    let port = std::env::var("PORT").expect("PORT must be set");
 
-    HttpServer::new(move || {
-        let leptos_options = &conf.leptos_options;
-        let site_root = &leptos_options.site_root;
+    let listener = tokio::net::TcpListener::bind(format!("{}:{}", address, port))
+        .await
+        .expect("Failed to bind port");
 
-        App::new()
-            .wrap(Logger::new(
-                "%t: %a - \u{001b}[35m%r \u{001b}[36m%s \u{001b}[37m- %Dms",
-            ))
-            .wrap(IdentityMiddleware::default())
-            .wrap(SessionMiddleware::new(
-                redis_store.clone(),
-                secret_key.clone(),
-            ))
-            .route("/api/{tail:.*}", leptos_actix::handle_server_fns())
-            // serve JS/WASM/CSS from `pkg`
-            .service(Files::new("/pkg", format!("{site_root}/pkg")))
-            // serve other assets from the `assets` directory
-            .service(Files::new("/assets", site_root))
-            // serve the favicon from /favicon.ico
-            .service(favicon)
-            .leptos_routes(
-                leptos_options.to_owned(),
-                routes.to_owned(),
-                || view! { <App/> },
-            )
-            .app_data(web::Data::new(leptos_options.to_owned()))
-        //.wrap(middleware::Compress::default())
-    })
-    .bind(&addr)?
-    .run()
-    .await
+    let app = axum::Router::new()
+        .layer(TraceLayer::new_for_http())
+        .route("/index.bundle.js", get(bundle))
+        .route("/main.css", get(style))
+        .route("/static/*uri", get(static_file))
+        .route("/", get(root))
+        .route("/*key", get(root));
+
+    axum::serve(listener, app).await.unwrap();
 }
 
-#[cfg(feature = "ssr")]
-#[actix_web::get("favicon.ico")]
-async fn favicon(
-    leptos_options: actix_web::web::Data<leptos::LeptosOptions>,
-) -> actix_web::Result<actix_files::NamedFile> {
-    let leptos_options = leptos_options.into_inner();
-    let site_root = &leptos_options.site_root;
-    Ok(actix_files::NamedFile::open(format!(
-        "{site_root}/favicon.ico"
-    ))?)
+async fn root() -> Html<String> {
+    let path = std::path::PathBuf::from(STATIC_DIR).join("index.html");
+    std::fs::read_to_string(path).unwrap().into()
 }
 
-#[cfg(not(any(feature = "ssr", feature = "csr")))]
-pub fn main() {
-    // no client-side main function
-    // unless we want this to work with e.g., Trunk for pure client-side testing
-    // see lib.rs for hydration function instead
-    // see optional feature `csr` instead
+async fn bundle() -> impl IntoResponse {
+    let path = std::path::PathBuf::from(STATIC_DIR).join("index.bundle.js");
+    let file = std::fs::read_to_string(path).unwrap();
+
+    axum::http::Response::builder()
+        .header("Content-Type", "text/javascript")
+        .body(file)
+        .unwrap()
+}
+
+async fn style() -> impl IntoResponse {
+    let path = std::path::PathBuf::from(STATIC_DIR)
+        .join("css")
+        .join("main.css");
+    let file = std::fs::read_to_string(path).unwrap();
+
+    axum::http::Response::builder()
+        .header("Content-Type", "text/css")
+        .body(file)
+        .unwrap()
 }
