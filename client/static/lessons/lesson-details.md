@@ -1,5 +1,12 @@
 ## About the Studio
 
+I offer private lesson teaching trombone, cello, and music composition.
+Students should expect to learn technical and artistic skills but also practice
+techniques and performance etiquette.
+
+Parents or guardians are welcome to sit in on lessons. For younger students,
+this is encouraged so they can help the student stay on track during the week.
+
 I believe that the best learning is done in a safe, comfortable environment. As
 such, I constantly strive to make my lessons a place where students can be
 themselves. Furthermore, I believe that we learn music fastest when we are
@@ -9,15 +16,6 @@ will enjoy in there lessons.
 I try to foster a relatable and down-to-earth atmosphere with my students. While
 I will always remain professional, the teachers which have been the most
 successful for me have been those that I was able to make friends with. 
-
-## Private Music Lessons
-
-I offer private lesson teaching trombone, cello, and music composition.
-Students should expect to learn technical and artistic skills but also practice
-techniques and performance etiquette.
-
-Parents or guardians are welcome to sit in on lessons. For younger students,
-this is encouraged so they can help the student stay on track during the week.
 
 ## What to expect
 

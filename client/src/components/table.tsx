@@ -12,7 +12,7 @@ const Table = (param: { className?: string, table: tableProps }) => {
         return <>An Error occured</>;
     }
 
-    let className = (param.className ? param.className : "") + " table-auto";
+    let className = (param.className ? param.className : "") + " content-center table-auto";
     return (
         <table className={className}>
             <thead>

@@ -31,7 +31,7 @@ const App = () => {
                 </Navbar>
             </Section>
             <div className="flex justify-center">
-                <Section className="sm:w-11/12 md:w-4/5 px-4 py-2 sm:py-4">
+                <Section className="sm:w-11/12 md:max-w-5xl px-4 py-2 sm:py-4">
                     {pathname == '/' ? <Home /> : <Outlet /> }
                 </Section>
             </div>
