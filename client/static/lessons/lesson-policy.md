@@ -1,15 +1,3 @@
-## About the Studio
-
-I believe that the best learning is done in a safe, comfortable environment. As
-such, I constantly strive to make my lessons a place where students can be
-themselves. Furthermore, I believe that we learn music fastest when we are
-having fun. Therefore, I try to incorporate music and exercises that students
-will enjoy in there lessons. 
-
-I try to foster a relatable and down-to-earth atmosphere with my students. While
-I will always remain professional, the teachers which have been the most
-successful for me have been those that I was able to make friends with. 
-
 ## Policies
 
 ### Lesson Payment
