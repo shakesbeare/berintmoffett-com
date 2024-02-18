@@ -23,3 +23,6 @@ build/
 # My stuff
 .env
 .DS_Store
+
+*.png
+*.wasm
