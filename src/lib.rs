@@ -6,12 +6,24 @@ pub const STATIC_DIR: &str = "./client/static";
 
 enum ContentType {
     Markdown,
+    JavaScript,
+    Wasm,
+    Ttf,
+    Html,
+    Png,
+    NotFound,
 }
 
 impl From<ContentType> for &'static str {
     fn from(content_type: ContentType) -> Self {
         match content_type {
             ContentType::Markdown => "text/markdown",
+            ContentType::JavaScript => "text/javascript",
+            ContentType::Wasm => "application/wasm",
+            ContentType::Ttf => "font/ttf",
+            ContentType::NotFound => "not found",
+            ContentType::Html => "text/html",
+            ContentType::Png => "image/png",
         }
     }
 }
@@ -20,6 +32,11 @@ impl ContentType {
     fn from_ext(extension: &str) -> Option<Self> {
         match extension {
             "md" => Some(ContentType::Markdown),
+            "js" => Some(ContentType::JavaScript),
+            "wasm" => Some(ContentType::Wasm),
+            "ttf" => Some(ContentType::Ttf),
+            "html" => Some(ContentType::Html),
+            "png" => Some(ContentType::Png),
             _ => None,
         }
     }
@@ -28,12 +45,24 @@ impl ContentType {
 enum Content {
     Plain(String),
     Markdown(String),
+    Wasm(Vec<u8>),
+    JavaScript(String),
+    Ttf(Vec<u8>),
     Bytes(Vec<u8>),
+    Html(String),
+    Png(Vec<u8>),
+    NotFound,
 }
 
 impl IntoResponse for Content {
     fn into_response(self) -> axum::response::Response {
         match self {
+            Content::JavaScript(t) => {
+                Response::builder()
+                    .header("Content-Type", "text/javascript")
+                    .body(t.into())
+                    .unwrap()
+            }
             Content::Markdown(t) => {
                 Response::builder()
                     .header("Content-Type", "text/markdown")
@@ -52,6 +81,36 @@ impl IntoResponse for Content {
                     .body(b.into())
                     .unwrap()
             },
+            Content::Wasm(b) => {
+                Response::builder()
+                    .header("Content-Type", "application/wasm")
+                    .body(b.into())
+                    .unwrap()
+            }
+            Content::Ttf(b) => {
+                Response::builder()
+                    .header("Content-Type", "font/ttf")
+                    .body(b.into())
+                    .unwrap()
+            }
+            Content::Html(t) => {
+                Response::builder()
+                    .header("Content-Type", "text/html")
+                    .body(t.into())
+                    .unwrap()
+            }
+            Content::NotFound => {
+                Response::builder()
+                    .status(404)
+                    .body("Not found".into())
+                    .unwrap()
+            }
+            Content::Png(b) => {
+                Response::builder()
+                    .header("Content-Type", "image/png")
+                    .body(b.into())
+                    .unwrap()
+            }
         }
     }
 }
@@ -61,12 +120,32 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
     let extension = path.extension().unwrap().to_str().unwrap();
 
     let content_type = ContentType::from_ext(extension).unwrap_or_else(|| {
-        panic!("Unknown content type for extension: {}", extension)
+        return ContentType::NotFound;
     });
+
+    tracing::info!("Serving file: {:?}", path);
 
     match content_type {
         ContentType::Markdown => {
             Content::Markdown(std::fs::read_to_string(path).unwrap())
         }
+        ContentType::JavaScript => {
+            Content::JavaScript(std::fs::read_to_string(path).unwrap())
+        }
+        ContentType::Wasm => {
+            Content::Wasm(std::fs::read(path).unwrap())
+        }
+        ContentType::Ttf => {
+            Content::Ttf(std::fs::read(path).unwrap())
+        }
+        ContentType::Html => {
+            Content::Html(std::fs::read_to_string(path).unwrap())
+        }
+        ContentType::NotFound => {
+            Content::NotFound
+        }
+        ContentType::Png => {
+            Content::Png(std::fs::read(path).unwrap())
+            }
     }
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import Page from './page';
+import GameEntry from '../components/game_entry';
+
 
 const Programming = () => {
     return (
         <Page>
-            <div>Coming soon...</div>
+            <GameEntry name="rust-snake" />
         </Page>
     )
 }

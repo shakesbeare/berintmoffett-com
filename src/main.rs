@@ -29,6 +29,7 @@ async fn main() {
         .route("/static/*uri", get(static_file))
         .route("/", get(root))
         .route("/*key", get(root));
+        
 
     axum::serve(listener, app).await.unwrap();
 }
@@ -59,3 +60,4 @@ async fn style() -> impl IntoResponse {
         .body(file)
         .unwrap()
 }
+
