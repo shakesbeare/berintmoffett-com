@@ -10,11 +10,11 @@ pub struct Highscore {
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
-struct Highscores {
+pub struct Highscores {
     highscores: Vec<Highscore>,
 }
 
-pub async fn get_snake_highscores() -> String {
+pub async fn get_snake_highscores() -> Json<Highscores> {
 
     let mut out = vec![];
     let mut rdr = csv::Reader::from_path("./snake_highscores.csv").unwrap();
@@ -24,7 +24,7 @@ pub async fn get_snake_highscores() -> String {
     }
 
     let highscores = Highscores { highscores: out };
-    serde_json::to_string(&highscores).unwrap()
+    Json(highscores)
 }
 
 pub async fn post_new_highscore(Json(highscore): Json<Highscore>) -> impl IntoResponse {
