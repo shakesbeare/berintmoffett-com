@@ -16,7 +16,7 @@ const About = () => {
         <Page>
             <TwoColumn>
                 <div>
-                    <img src="https://www.dl.dropboxusercontent.com/s/gt4delvds8ngm45/Bear%20Moffett.jpg?dl=0" alt="Bear Moffett" />
+                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" />
                 </div>
                 <div>
                     <Markdown>{about}</Markdown>

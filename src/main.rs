@@ -1,3 +1,4 @@
+use anyhow::Result;
 use axum::{
     response::{Html, IntoResponse},
     routing::get,
@@ -8,10 +9,12 @@ use tower_http::trace::TraceLayer;
 use berintmoffett_com::{STATIC_DIR, static_file};
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<()> {
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::DEBUG)
         .init();
+    tracing::info!("Downloading files...");
+    berintmoffett_com::startup::startup().await?;
 
     dotenv().ok();
 
@@ -30,8 +33,12 @@ async fn main() {
         .route("/", get(root))
         .route("/*key", get(root));
         
+    tracing::info!("Ready!");
+    tracing::info!("Listening on http://{}:{}", address, port);
 
     axum::serve(listener, app).await.unwrap();
+    
+    Ok(())
 }
 
 async fn root() -> Html<String> {

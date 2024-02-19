@@ -1,3 +1,5 @@
+pub mod startup;
+
 use axum::{
     response::IntoResponse, extract::Path, http::Response}
 ;
@@ -11,6 +13,7 @@ enum ContentType {
     Ttf,
     Html,
     Png,
+    Jpg,
     NotFound,
 }
 
@@ -24,6 +27,7 @@ impl From<ContentType> for &'static str {
             ContentType::NotFound => "not found",
             ContentType::Html => "text/html",
             ContentType::Png => "image/png",
+            ContentType::Jpg => "image/jph",
         }
     }
 }
@@ -37,6 +41,7 @@ impl ContentType {
             "ttf" => Some(ContentType::Ttf),
             "html" => Some(ContentType::Html),
             "png" => Some(ContentType::Png),
+            "jpg" => Some(ContentType::Jpg),
             _ => None,
         }
     }
@@ -51,6 +56,7 @@ enum Content {
     Bytes(Vec<u8>),
     Html(String),
     Png(Vec<u8>),
+    Jpg(Vec<u8>),
     NotFound,
 }
 
@@ -111,6 +117,12 @@ impl IntoResponse for Content {
                     .body(b.into())
                     .unwrap()
             }
+            Content::Jpg(b) => {
+                Response::builder()
+                    .header("Content-Type", "image/jpg")
+                    .body(b.into())
+                    .unwrap()
+            }
         }
     }
 }
@@ -146,6 +158,9 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
         }
         ContentType::Png => {
             Content::Png(std::fs::read(path).unwrap())
-            }
+        }
+        ContentType::Jpg => {
+            Content::Jpg(std::fs::read(path).unwrap())
+        }
     }
 }
