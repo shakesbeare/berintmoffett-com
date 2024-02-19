@@ -2,7 +2,7 @@ use axum::Json;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 struct Highscore {
-    name: [char; 3],
+    name: String,
     score: u32,
 }
 
@@ -11,7 +11,7 @@ struct Highscores {
     highscores: Vec<Highscore>,
 }
 
-pub fn get_snake_highscores() -> Json<String> {
+pub async fn get_snake_highscores() -> Json<String> {
 
     let mut out = vec![];
     let mut rdr = csv::Reader::from_path("./snake_highscores.csv").unwrap();
