@@ -45,6 +45,8 @@ export interface InitOutput {
   readonly wgpu_render_pass_push_debug_group: (a: number, b: number, c: number) => void;
   readonly wgpu_render_pass_pop_debug_group: (a: number) => void;
   readonly wgpu_render_pass_write_timestamp: (a: number, b: number, c: number) => void;
+  readonly wgpu_render_pass_begin_occlusion_query: (a: number, b: number) => void;
+  readonly wgpu_render_pass_end_occlusion_query: (a: number) => void;
   readonly wgpu_render_pass_begin_pipeline_statistics_query: (a: number, b: number, c: number) => void;
   readonly wgpu_render_pass_end_pipeline_statistics_query: (a: number) => void;
   readonly wgpu_render_pass_execute_bundles: (a: number, b: number, c: number) => void;
@@ -56,8 +58,9 @@ export interface InitOutput {
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
-  readonly wasm_bindgen__convert__closures__invoke0_mut__hc7bf493bca7fdf61: (a: number, b: number) => void;
-  readonly wasm_bindgen__convert__closures__invoke1_mut__h107a7844ed660eaf: (a: number, b: number, c: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke1_mut__h12b2db23179a8d83: (a: number, b: number, c: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke2_mut__h492a29c8e0c50bbd: (a: number, b: number, c: number, d: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke0_mut__h1c2ef7e32386b283: (a: number, b: number) => void;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_exn_store: (a: number) => void;
   readonly __wbindgen_start: () => void;
