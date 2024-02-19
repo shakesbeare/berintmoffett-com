@@ -1,4 +1,5 @@
 pub mod startup;
+pub mod api;
 
 use axum::{
     response::IntoResponse, extract::Path, http::Response}

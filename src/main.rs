@@ -30,6 +30,7 @@ async fn main() -> Result<()> {
         .route("/index.bundle.js", get(bundle))
         .route("/main.css", get(style))
         .route("/static/*uri", get(static_file))
+        .route("/api/snake-highscores", get(berintmoffett_com::api::get_snake_highscores))
         .route("/", get(root))
         .route("/*key", get(root));
         
