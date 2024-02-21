@@ -14,7 +14,7 @@ async fn main() -> Result<()> {
         .with_max_level(tracing::Level::DEBUG)
         .init();
     tracing::info!("Downloading files...");
-    berintmoffett_com::startup::startup().await;
+    berintmoffett_com::startup::startup();
 
     dotenv().ok();
 

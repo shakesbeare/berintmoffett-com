@@ -9,15 +9,16 @@ struct File {
     source_uri: String,
 }
 
-pub async fn startup() {
+pub fn startup() {
+    tracing::info!("hello");
+    let files_list = get_files_list().unwrap();
+    let mut map = HashMap::new();
+    for f in files_list.into_iter() {
+        let dest = f.destination_uri;
+        let redirect_uri = f.source_uri;
+        map.insert(dest, redirect_uri);
+    }
     crate::FILES.get_or_init(|| {
-        let files = get_files_list().unwrap();
-        let mut map = HashMap::new();
-        let _ = files.into_iter().map(|f| {
-            let dest = std::path::PathBuf::from(STATIC_DIR).join(&f.destination_uri).to_string_lossy().to_string();
-            let redirect_uri = f.source_uri;
-            map.insert(dest, redirect_uri);
-        });
         map
     });
 }

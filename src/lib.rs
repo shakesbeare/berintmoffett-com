@@ -147,6 +147,7 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
     };
 
     if let Some(redirect_uri) = files.get(&uri) {
+        tracing::info!("Redirecting...");
         return Content::Redirect(redirect_uri.to_string());
     };
 
