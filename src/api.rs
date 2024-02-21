@@ -1,3 +1,4 @@
+use axum::http::Response;
 use axum::Json;
 use axum::{
     response::IntoResponse,
@@ -14,7 +15,7 @@ pub struct Highscores {
     highscores: Vec<Highscore>,
 }
 
-pub async fn get_snake_highscores() -> Json<Highscores> {
+pub async fn get_snake_highscores() -> Response<String> {
 
     let mut out = vec![];
     let mut rdr = csv::Reader::from_path("./snake_highscores.csv").unwrap();
@@ -24,7 +25,13 @@ pub async fn get_snake_highscores() -> Json<Highscores> {
     }
 
     let highscores = Highscores { highscores: out };
-    Json(highscores)
+    let json = serde_json::to_string(&highscores).unwrap();
+
+    Response::builder()
+        .header("Content-Type", "application/json")
+        .header("Access-Control-Allow-Origin", "*")
+        .body(json)
+        .unwrap()
 }
 
 pub async fn post_new_highscore(Json(highscore): Json<Highscore>) -> impl IntoResponse {

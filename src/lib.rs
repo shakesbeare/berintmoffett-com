@@ -1,11 +1,14 @@
 pub mod startup;
 pub mod api;
 
+use std::{sync::OnceLock, collections::HashMap};
+
 use axum::{
     response::IntoResponse, extract::Path, http::Response}
 ;
 
 pub const STATIC_DIR: &str = "./client/static";
+pub static FILES: OnceLock<HashMap<String, String>> = OnceLock::new();
 
 enum ContentType {
     Markdown,
@@ -16,6 +19,7 @@ enum ContentType {
     Png,
     Jpg,
     NotFound,
+    Redirect,
 }
 
 impl From<ContentType> for &'static str {
@@ -25,10 +29,11 @@ impl From<ContentType> for &'static str {
             ContentType::JavaScript => "text/javascript",
             ContentType::Wasm => "application/wasm",
             ContentType::Ttf => "font/ttf",
-            ContentType::NotFound => "not found",
             ContentType::Html => "text/html",
             ContentType::Png => "image/png",
             ContentType::Jpg => "image/jph",
+            ContentType::NotFound => "not found",
+            ContentType::Redirect => "redirect",
         }
     }
 }
@@ -59,6 +64,7 @@ enum Content {
     Png(Vec<u8>),
     Jpg(Vec<u8>),
     NotFound,
+    Redirect(String),
 }
 
 impl IntoResponse for Content {
@@ -106,12 +112,6 @@ impl IntoResponse for Content {
                     .body(t.into())
                     .unwrap()
             }
-            Content::NotFound => {
-                Response::builder()
-                    .status(404)
-                    .body("Not found".into())
-                    .unwrap()
-            }
             Content::Png(b) => {
                 Response::builder()
                     .header("Content-Type", "image/png")
@@ -124,16 +124,37 @@ impl IntoResponse for Content {
                     .body(b.into())
                     .unwrap()
             }
+            Content::NotFound => {
+                Response::builder()
+                    .status(404)
+                    .body("Not found".into())
+                    .unwrap()
+            }
+            Content::Redirect(uri) => {
+                Response::builder()
+                    .status(301)
+                    .header("Location", uri)
+                    .body("Redirecting".into())
+                    .unwrap()
+            }
         }
     }
 }
 
 pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
+    let Some(files) = FILES.get() else {
+        panic!("An error occurred! FILES should be loaded by now!");
+    };
+
+    if let Some(redirect_uri) = files.get(&uri) {
+        return Content::Redirect(redirect_uri.to_string());
+    };
+
     let path = std::path::PathBuf::from(STATIC_DIR).join(uri);
     let extension = path.extension().unwrap().to_str().unwrap();
 
-    let content_type = ContentType::from_ext(extension).unwrap_or_else(|| {
-        return ContentType::NotFound;
+    let content_type = ContentType::from_ext(extension).unwrap_or({
+        ContentType::NotFound
     });
 
     tracing::info!("Serving file: {:?}", path);
@@ -162,6 +183,10 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
         }
         ContentType::Jpg => {
             Content::Jpg(std::fs::read(path).unwrap())
+        }
+        ContentType::Redirect => {
+            unreachable!();
+            // Content::Redirect("".to_string())
         }
     }
 }

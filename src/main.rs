@@ -6,7 +6,7 @@ use axum::{
 use dotenv::dotenv;
 use tower_http::trace::TraceLayer;
 
-use berintmoffett_com::{STATIC_DIR, static_file};
+use berintmoffett_com::{static_file, STATIC_DIR};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -14,7 +14,7 @@ async fn main() -> Result<()> {
         .with_max_level(tracing::Level::DEBUG)
         .init();
     tracing::info!("Downloading files...");
-    berintmoffett_com::startup::startup().await?;
+    berintmoffett_com::startup::startup().await;
 
     dotenv().ok();
 
@@ -30,15 +30,19 @@ async fn main() -> Result<()> {
         .route("/index.bundle.js", get(bundle))
         .route("/main.css", get(style))
         .route("/static/*uri", get(static_file))
-        .route("/api/snake-highscores", get(berintmoffett_com::api::get_snake_highscores).post(berintmoffett_com::api::post_new_highscore))
+        .route(
+            "/api/snake-highscores",
+            get(berintmoffett_com::api::get_snake_highscores)
+                .post(berintmoffett_com::api::post_new_highscore),
+        )
         .route("/", get(root))
         .route("/*key", get(root));
-        
+
     tracing::info!("Ready!");
     tracing::info!("Listening on http://{}:{}", address, port);
 
     axum::serve(listener, app).await.unwrap();
-    
+
     Ok(())
 }
 
@@ -68,4 +72,3 @@ async fn style() -> impl IntoResponse {
         .body(file)
         .unwrap()
 }
-

@@ -1,4 +1,4 @@
-use std::future::Future;
+use std::collections::HashMap;
 
 use crate::STATIC_DIR;
 use anyhow::Result;
@@ -9,37 +9,17 @@ struct File {
     source_uri: String,
 }
 
-pub async fn startup() -> Result<()> {
-    let files = get_files_list();
-
-    let files = match files {
-        Ok(f) => f,
-        Err(e) => {
-            panic!("{:#?}", e);
-        }
-    };
-
-    let files = files.into_iter().map(|f| {
-        let dest = std::path::PathBuf::from(STATIC_DIR).join(&f.destination_uri);
-        let handle = tokio::spawn(get_file(f.source_uri));
-        (dest, handle)
+pub async fn startup() {
+    crate::FILES.get_or_init(|| {
+        let files = get_files_list().unwrap();
+        let mut map = HashMap::new();
+        let _ = files.into_iter().map(|f| {
+            let dest = std::path::PathBuf::from(STATIC_DIR).join(&f.destination_uri).to_string_lossy().to_string();
+            let redirect_uri = f.source_uri;
+            map.insert(dest, redirect_uri);
+        });
+        map
     });
-
-    let mut res = Vec::with_capacity(files.len());
-    for f in files.into_iter() {
-        tracing::info!("Downloading {:?}...", &f.0);
-        res.push((f.0, f.1.await?));
-    }
-
-    for f in res {
-        tracing::info!("Writing {:?}...", &f.0);
-        let dest = f.0;
-        let bytes = f.1?.bytes().await?;
-
-        std::fs::write(dest, bytes)?;
-    }
-
-    Ok(())
 }
 
 fn get_files_list() -> Result<Vec<File>> {
@@ -51,10 +31,4 @@ fn get_files_list() -> Result<Vec<File>> {
     }
 
     Ok(out)
-}
-
-async fn get_file<'a>(
-    uri: String,
-) -> std::prelude::v1::Result<reqwest::Response, reqwest::Error> {
-    reqwest::get(uri).await
 }
