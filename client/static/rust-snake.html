@@ -9,7 +9,11 @@
 <body>
     <script type='module'>
         import init from './wasm/rust-snake/rust-snake.js';
-        init();
+        init().catch((error) => {
+            if(!error.message.startsWith("Using exceptions for control flow,")) {
+                throw error;
+            }
+        });
     </script>
         <canvas id="game"
             height="600"
