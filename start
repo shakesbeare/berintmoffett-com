@@ -1,0 +1,4 @@
+#!/bin/bash
+
+. /opt/berintmoffett-com/.cargo/env
+cargo run --release
