@@ -155,6 +155,7 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
     let Some(files) = FILES.get() else {
         panic!("An error occurred! FILES should be loaded by now!");
     };
+    tracing::info!("Requested file: {}", uri);
 
     if let Some(redirect_uri) = files.get(&uri) {
         tracing::info!("Redirecting...");
