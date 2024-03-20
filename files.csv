@@ -2,4 +2,15 @@ destination_uri,source_uri
 img/rust-snake-thumbnail.png,https://www.dl.dropboxusercontent.com/scl/fi/86r8zoyafn52g6mfe4f5c/rust-snake-thumbnail.png?rlkey=g4w95cnd8ncf688grs7565jh8&dl=0
 wasm/rust-snake/rust-snake_bg.wasm,https://www.dl.dropboxusercontent.com/scl/fi/vz6gvgv64p9xop07fkifd/rust-snake_bg.wasm?rlkey=4qvt1wq69cz2u79jh8z6v2uvg&dl=0
 img/bear-portrait.jpg,https://www.dl.dropboxusercontent.com/s/gt4delvds8ngm45/Bear%20Moffett.jpg?dl=0
-
+static/assets/eat_01.mp3, https://www.dropbox.com/scl/fi/k9r59qiqoek5shmxe1guz/eat_01.mp3?rlkey=htei9b1p0ko4daodttzd3royj&dl=0
+static/assets/eat_02.mp3, https://www.dropbox.com/scl/fi/0o4ooiig85o0v0leny8s3/eat_02.mp3?rlkey=j0r8w9c4bvlmjaprhhff0wpzi&dl=0
+static/assets/eat_03.mp3, https://www.dropbox.com/scl/fi/02vj12x8gjqwcv4ezgl5x/eat_03.mp3?rlkey=ajl349qndctsnpc30sok92odd&dl=0
+static/assets/eat_04.mp3, https://www.dropbox.com/scl/fi/8sgri4j2284q7dnjigtim/eat_04.mp3?rlkey=kzsk95bwmwg98l1s7qkplgqmj&dl=0
+static/assets/eat_05.mp3, https://www.dropbox.com/scl/fi/q0mr7anqdiq726tza7pz7/eat_05.mp3?rlkey=0j4svebasbxbgomtdtqn33chc&dl=0
+static/assets/eat_06.mp3, https://www.dropbox.com/scl/fi/8p9kzx4xo88ocao9sgc8u/eat_06.mp3?rlkey=k58rbovuxboltcdx3vyxv51gm&dl=0
+static/assets/eat_07.mp3, https://www.dropbox.com/scl/fi/nxf2cjopna0pli1a2wuo8/eat_07.mp3?rlkey=epndc7onw5flf76ag2812iksn&dl=0
+static/assets/eat_08.mp3, https://www.dropbox.com/scl/fi/stifaq16vuwnmf5w4jl2z/eat_08.mp3?rlkey=iypkk6m1zxrwdqw77kxnu9o6h&dl=0
+static/assets/eat_09.mp3, https://www.dropbox.com/scl/fi/sdo8fwj3x7qyn7vj674qx/eat_09.mp3?rlkey=cw8xxex2yy5t1lp7p9mjgg3dn&dl=0
+static/assets/eat_10.mp3, https://www.dropbox.com/scl/fi/vlhuesu9mz7cutn1s878y/eat_10.mp3?rlkey=fet9phfm3ih4tjgqcso3oi24i&dl=0
+static/assets/eat_11.mp3, https://www.dropbox.com/scl/fi/j95bk4lfrtuusqb1ygkvx/eat_11.mp3?rlkey=7rumlyphnzjv5l5t9jtsfyrzs&dl=0
+static/assets/speed_up.mp3, https://www.dropbox.com/scl/fi/kdgfxswxh62dhgu553o0s/speed_up.mp3?rlkey=m97yhkg630zpew9weus3yceie&dl=0

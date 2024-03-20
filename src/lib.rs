@@ -18,6 +18,7 @@ enum ContentType {
     Html,
     Png,
     Jpg,
+    Mpeg,
     NotFound,
     Redirect,
 }
@@ -32,6 +33,7 @@ impl From<ContentType> for &'static str {
             ContentType::Html => "text/html",
             ContentType::Png => "image/png",
             ContentType::Jpg => "image/jph",
+            ContentType::Mpeg => "audio/mpeg",
             ContentType::NotFound => "not found",
             ContentType::Redirect => "redirect",
         }
@@ -48,6 +50,7 @@ impl ContentType {
             "html" => Some(ContentType::Html),
             "png" => Some(ContentType::Png),
             "jpg" => Some(ContentType::Jpg),
+            "mp3" => Some(ContentType::Mpeg),
             _ => None,
         }
     }
@@ -63,6 +66,7 @@ enum Content {
     Html(String),
     Png(Vec<u8>),
     Jpg(Vec<u8>),
+    Mpeg(Vec<u8>),
     NotFound,
     Redirect(String),
 }
@@ -121,6 +125,12 @@ impl IntoResponse for Content {
             Content::Jpg(b) => {
                 Response::builder()
                     .header("Content-Type", "image/jpg")
+                    .body(b.into())
+                    .unwrap()
+            }
+            Content::Mpeg(b) => {
+                Response::builder()
+                    .header("Content-Type", "audio/mpeg")
                     .body(b.into())
                     .unwrap()
             }
@@ -184,6 +194,9 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
         }
         ContentType::Jpg => {
             Content::Jpg(std::fs::read(path).unwrap())
+        }
+        ContentType::Mpeg => {
+            Content::Mpeg(std::fs::read(path).unwrap())
         }
         ContentType::Redirect => {
             unreachable!();
