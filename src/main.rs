@@ -10,11 +10,16 @@ use berintmoffett_com::{static_file, STATIC_DIR};
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    #[cfg(debug_assertions)]
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::DEBUG)
         .init();
+    #[cfg(not(debug_assertions))]
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::WARN)
+        .init();
     tracing::info!("Downloading files...");
-    berintmoffett_com::startup::startup();
+    berintmoffett_com::startup::startup().await;
 
     dotenv().ok();
 

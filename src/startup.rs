@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-use crate::STATIC_DIR;
 use anyhow::Result;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
@@ -9,8 +8,9 @@ struct File {
     source_uri: String,
 }
 
-pub fn startup() {
+pub async fn startup() {
     tracing::info!("hello");
+    crate::database::init().await.unwrap();
     let files_list = get_files_list().unwrap();
     let mut map = HashMap::new();
     for f in files_list.into_iter() {
@@ -21,6 +21,8 @@ pub fn startup() {
     crate::FILES.get_or_init(|| {
         map
     });
+
+
 }
 
 fn get_files_list() -> Result<Vec<File>> {

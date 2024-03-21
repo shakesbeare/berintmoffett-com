@@ -29,3 +29,4 @@ build/
 *.jpg
 
 snake_highscores.csv
+database.db

@@ -1,5 +1,6 @@
 pub mod startup;
 pub mod api;
+pub mod database;
 
 use std::{sync::OnceLock, collections::HashMap};
 
@@ -20,6 +21,7 @@ enum ContentType {
     Jpg,
     Mpeg,
     NotFound,
+    #[allow(dead_code)]
     Redirect,
 }
 
@@ -56,6 +58,7 @@ impl ContentType {
     }
 }
 
+#[allow(dead_code)]
 enum Content {
     Plain(String),
     Markdown(String),
