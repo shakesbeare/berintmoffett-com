@@ -27,3 +27,5 @@ build/
 *.png
 *.wasm
 *.jpg
+
+snake_highscores.csv
