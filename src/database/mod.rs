@@ -24,7 +24,8 @@ pub async fn init() -> Result<()> {
 
             sqlx::query(r#"
             CREATE TABLE snake_leaderboard (
-                name TEXT PRIMARY KEY NOT NULL,
+                id INTEGER PRIMARY KEY,
+                name TEXT KEY NOT NULL,
                 score INTEGER NOT NULL
             )
             "#)
