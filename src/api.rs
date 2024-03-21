@@ -12,6 +12,7 @@ pub struct Highscores {
 
 pub async fn get_snake_highscores() -> Response<String> {
     let out = crate::database::snake::get_highscores().await.unwrap();
+    dbg!(&out);
 
     let highscores = Highscores { highscores: out };
     let json = serde_json::to_string(&highscores).unwrap();

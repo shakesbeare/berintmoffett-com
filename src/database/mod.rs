@@ -30,6 +30,15 @@ pub async fn init() -> Result<()> {
             "#)
                 .execute(&pool).await?;
 
+            sqlx::query(r#"
+            INSERT INTO snake_leaderboard (name, score)
+            VALUES ('aaa', 0),
+                     ('bbb', 0),
+                     ('ccc', 0),
+                     ('ddd', 0),
+                     ('eee', 0)
+            "#).execute(&pool).await?;
+
             pool
         }
     };
