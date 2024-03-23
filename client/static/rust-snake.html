@@ -10,17 +10,12 @@
     <script type='module'>
         import init from './wasm/rust-snake/rust-snake.js';
         init().catch((error) => {
-            if(!error.message.startsWith("Using exceptions for control flow,")) {
+            if (!error.message.startsWith("Using exceptions for control flow,")) {
                 throw error;
             }
         });
     </script>
-        <canvas id="game"
-            height="600"
-            width="600"
-            tabindex="0"
-            style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block; width: 600px;"
-        >
+    <canvas id="game" style="outline: none;" height="100%" width="100%" tabindex="0" style="overflow: hidden;">
 </body>
 
 </html>

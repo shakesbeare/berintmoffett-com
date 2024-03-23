@@ -31,8 +31,9 @@ const GameEntry = (opts: {name: string}) => {
     });
 
     const dialogStyle = {
-        width: "700px",
-        height: "700px",
+        width: '616px', // something is adding 8px of padding... weird
+        height: '616px',
+        overflow: 'hidden',
     }
 
     const title = kebabCaseToTitleCase(opts.name);
@@ -43,23 +44,28 @@ const GameEntry = (opts: {name: string}) => {
                 <img onClick={handleClick} src={`/static/img/${opts.name}-thumbnail.png`} width={75} height={75} alt="Rust Snake Game" className="row-span-1" />
                 <div className="row-span-1 text-sm">{title}</div>
             </div>
-            <dialog id={`${opts.name}-dialog`} style={dialogStyle}>
-                <div className="align-middle h-full w-full">
+            <dialog id={`${opts.name}-dialog`} style={dialogStyle} className="bg-neutral-100 dark:bg-neutral-800">
                     { gameLoaded && <WasmFrame name={opts.name} /> }
-                </div>
             </dialog>
         </div>
     )
+}
+
+const iframeStyle: React.CSSProperties = {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    border: '0px',
+    overflow: 'hidden',
 }
 
 const WasmFrame = (opts: {name: string}) => {
     return (
             <iframe
                 id={`${opts.name}-iframe`}
-                width="100%"
-                height="100%"
+                style={iframeStyle}
                 src={`/static/${opts.name}.html`}
-                className="p-10"
+                className="bg-neutral-100 dark:bg-neutral-800"
             >
             </iframe>
     );

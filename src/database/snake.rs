@@ -44,7 +44,7 @@ pub async fn get_top_n_scores(n: i32) -> Result<Vec<LeaderboardEntry>> {
 
 pub async fn get_all_scores() -> Result<Vec<LeaderboardEntry>> {
     let pool = super::POOL.get().expect("Database pool not initialized").as_ref();
-    let highscores = sqlx::query_as::<_, LeaderboardEntry>(
+    let mut highscores = sqlx::query_as::<_, LeaderboardEntry>(
         r#"
         SELECT name, score
         FROM snake_leaderboard
@@ -53,5 +53,6 @@ pub async fn get_all_scores() -> Result<Vec<LeaderboardEntry>> {
     )
     .fetch_all(pool).await?;
 
+    highscores.sort_by(|a, b| b.score.cmp(&a.score));
     Ok(highscores)
 }

@@ -10,6 +10,7 @@ import Programming from './pages/programming';
 import Contact from './pages/contact';
 import Login from './pages/login';
 import ErrorPage from './pages/error_page';
+import SnakeLeaderboard from './pages/snake_leaderboard';
 
 const router = createBrowserRouter([
     {
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
                 element: <ErrorPage />,
             },
             {
-                path: '/about',
+                path: 'about',
                 element: <About />
             },
             {
-                path: '/lessons',
+                path: 'lessons',
                 element: <Lessons />
             },
             {
@@ -35,8 +36,12 @@ const router = createBrowserRouter([
             },
             {
                 path: 'programming',
-                element: <Programming />
+                element: <Programming />,
             },
+            {
+                    path: 'snake-leaderboard',
+                    element: <SnakeLeaderboard />
+                },
             {
                 path: 'contact',
                 element: <Contact />

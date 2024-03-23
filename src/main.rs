@@ -40,6 +40,7 @@ async fn main() -> Result<()> {
             get(berintmoffett_com::api::get_snake_highscores)
                 .post(berintmoffett_com::api::post_new_highscore),
         )
+        .route("/api/snake-leaderboard", get(berintmoffett_com::api::snake_leaderboard))
         .route("/", get(root))
         .route("/*key", get(root));
 
