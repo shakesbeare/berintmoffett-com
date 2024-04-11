@@ -28,7 +28,7 @@ const SnakeLeaderboard = () => {
                         const entry = data.highscores[i];
                         if (entry && entry.score <= 0) {
                         } else if (entry) {
-                            markdownStr += `${i}. ${entry.score} - ${entry.name}\n`;
+                            markdownStr += `${data.highscores.length - i}. ${entry.score} - ${entry.name}\n`;
                         }
                     }
                     setMarkdown(markdownStr);

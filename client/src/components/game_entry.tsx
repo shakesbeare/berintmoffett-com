@@ -44,7 +44,7 @@ const GameEntry = (opts: {name: string}) => {
                 <img onClick={handleClick} src={`/static/img/${opts.name}-thumbnail.png`} width={75} height={75} alt="Rust Snake Game" className="row-span-1" />
                 <div className="row-span-1 text-sm">{title}</div>
             </div>
-            <dialog id={`${opts.name}-dialog`} style={dialogStyle} className="bg-neutral-100 dark:bg-neutral-800">
+            <dialog id={`${opts.name}-dialog`} style={dialogStyle} className="bg-neutral-100 dark:bg-neutral-800 rounded-lg">
                     { gameLoaded && <WasmFrame name={opts.name} /> }
             </dialog>
         </div>
