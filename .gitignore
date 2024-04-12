@@ -30,3 +30,4 @@ build/
 
 snake_highscores.csv
 database.db
+client/static/wasm/rust-snake/*
