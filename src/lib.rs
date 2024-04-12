@@ -208,3 +208,7 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
         }
     }
 }
+
+pub fn snake_update() -> impl IntoResponse {
+
+}

@@ -2,6 +2,7 @@ use anyhow::Result;
 use axum::{
     response::{Html, IntoResponse},
     routing::get,
+    routing::post,
 };
 use dotenv::dotenv;
 use tower_http::trace::TraceLayer;
@@ -41,6 +42,7 @@ async fn main() -> Result<()> {
                 .post(berintmoffett_com::api::post_new_highscore),
         )
         .route("/api/snake-leaderboard", get(berintmoffett_com::api::snake_leaderboard))
+        .route("/api/snake-update", post(berintmoffett_com::api::snake_update))
         .route("/", get(root))
         .route("/*key", get(root));
 
