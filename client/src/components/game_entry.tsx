@@ -31,8 +31,8 @@ const GameEntry = (opts: {name: string}) => {
     });
 
     const dialogStyle = {
-        width: '616px', // something is adding 8px of padding... weird
-        height: '616px',
+        width: '618px', // something is adding 8px of padding... weird
+        height: '618px',
         overflow: 'hidden',
     }
 

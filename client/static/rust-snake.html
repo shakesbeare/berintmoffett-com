@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=1920, initial-scale=1.0">
 </head>
 
-<body>
+<body style="overflow: hidden">
     <script type='module'>
         import init from './wasm/rust-snake/rust-snake.js';
         init().catch((error) => {
@@ -15,7 +15,7 @@
             }
         });
     </script>
-    <canvas id="game" style="outline: none;" height="100%" width="100%" tabindex="0" style="overflow: hidden;">
+    <canvas id="game" style="outline: none; overflow: hidden" height="100%" width="100%" tabindex="0" style="overflow: hidden;">
 </body>
 
 </html>
