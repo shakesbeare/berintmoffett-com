@@ -24,10 +24,10 @@ const App = () => {
                     <NavbarItem text="Home" uri="/" />
                     <NavbarItem text="About" uri="/about" />
                     <NavbarItem text="Lessons" uri="/lessons" />
-                    <NavbarItem text="Composition" uri="/composition" />
+                    {/*<NavbarItem text="Composition" uri="/composition" />*/}
                     <NavbarItem text="Programming" uri="/programming" />
                     <NavbarItem text="Contact" uri="/contact" />
-                    <NavbarItem text="Login" uri="/login" className="col-start-12" />
+                    {/* <NavbarItem text="Login" uri="/login" className="col-start-12" />*/}
                 </Navbar>
             </Section>
             <div className="flex justify-center">

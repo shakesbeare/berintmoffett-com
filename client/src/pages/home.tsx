@@ -1,11 +1,27 @@
 import React from 'react';
 import Page from './page';
+import Markdown from '../components/markdown';
+import TwoColumn from '../components/two_column';
 
 const Home = () => {
+    let [about, setAbout] = React.useState("Loading...");
+
+    React.useEffect(() => {
+        fetch("/static/bio.md")
+            .then(response => response.text())
+            .then(text => setAbout(text));
+    }, []);
+
     return (
         <Page>
-            <div className="text-center text-3xl">Berint Moffett</div>
-            <div className="text-center text-xl">Programmer · Composer ·  Performer</div>
+            <TwoColumn>
+                <div>
+                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" />
+                </div>
+                <div>
+                    <Markdown>{about}</Markdown>
+                </div>
+            </TwoColumn>
         </Page>
     )
 }
