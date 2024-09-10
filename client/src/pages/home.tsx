@@ -15,11 +15,13 @@ const Home = () => {
     return (
         <Page>
             <TwoColumn>
-                <div>
-                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" className="rounded-md align-middle" />
+                <div className="relative inset-0 flex">
+                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" className="rounded-md m-auto" />
                 </div>
-                <div>
-                    <Markdown>{about}</Markdown>
+                <div className="relative inset-0 flex">
+                    <div className="m-auto">
+                        <Markdown>{about}</Markdown>
+                    </div>
                 </div>
             </TwoColumn>
         </Page>

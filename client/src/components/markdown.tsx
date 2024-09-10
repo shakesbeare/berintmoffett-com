@@ -12,14 +12,14 @@ const Header = (param: { size: number, children?: React.ReactNode }) => {
 
 const Paragraph = (param: { children?: React.ReactNode }) => {
     return (
-        <div className="my-4">
+        <div className="[&:not(:last-child)]:mb-4">
             {param.children}
         </div>
     )
 }
 
-const Markdown = (param: { children?: string }) => {
-    return (
+const Markdown = (param: { children?: string, className?: string }) => {
+    let md = (
         <ReactMarkdown
             components={{
                 h2(props) {
@@ -58,7 +58,13 @@ const Markdown = (param: { children?: string }) => {
         >
             {param.children}
         </ReactMarkdown>
-    )
+    );
+
+    for (const child of md.props.children) {
+        console.log(child);
+    }
+
+    return md;
 }
 
 export default Markdown;
