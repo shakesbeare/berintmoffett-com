@@ -14,6 +14,9 @@
                 default = pkgs.mkShell {
                     packages = with pkgs; [
                         nodejs
+                        cargo-watch
+                        libiconv
+                        darwin.apple_sdk.frameworks.SystemConfiguration
                     ];
                     shellHook = "exec $SHELL";
                 };

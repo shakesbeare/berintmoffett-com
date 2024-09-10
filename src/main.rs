@@ -13,7 +13,7 @@ use berintmoffett_com::{static_file, STATIC_DIR};
 async fn main() -> Result<()> {
     #[cfg(debug_assertions)]
     tracing_subscriber::fmt()
-        .with_max_level(tracing::Level::DEBUG)
+        .with_max_level(tracing::Level::TRACE)
         .init();
     #[cfg(not(debug_assertions))]
     tracing_subscriber::fmt()
