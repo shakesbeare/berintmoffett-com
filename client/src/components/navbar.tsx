@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const NavbarItem = (param: { text: string, uri: string, className?: string }) => {
-    let className = (param.className ? param.className : "") + " col-span-1 py-3 hover:dark:bg-neutral-700 hover:bg-neutral-200";
+    let className = (param.className ? param.className : "") + " col-span-1 py-3 hover:bg-blue hover:text-cavernous-700";
     return (
         <Link to={param.uri} className={className}>{param.text}</Link>
     )

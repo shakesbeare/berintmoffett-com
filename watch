@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+pushd client
+npx webpack --watch &
+popd
+cargo watch -x run -w src
+

@@ -30,12 +30,12 @@ export const ItemEntry = (opts: { name: string, alt: string, handleClick: () => 
 
     return (
         <div>
-            <div data-tooltip-id={tooltipName} className="hover:bg-neutral-700 m-1 px-2 py-1 rounded-md shadow-md shadow-neutral-900">
-                <img onClick={opts.handleClick} src={`/static/img/${opts.name}-thumbnail.png`} width={75} height={75} alt={opts.alt} className="row-span-1" />
+            <button onClick={opts.handleClick} data-tooltip-id={tooltipName} className="dark:bg-cavernous-700 bg-cavernous-50 hover:bg-blue hover:text-cavernous-700 m-1 px-2 py-1 rounded-md shadow-md shadow-cavernous-300 dark:shadow-cavernous-800">
+                <img src={`/static/img/${opts.name}-thumbnail.png`} width={75} height={75} alt={opts.alt} className="rounded-md row-span-1" />
                 <div className="row-span-1 text-sm">{title}</div>
                 {opts.inner}
-            </div>
-            <Tooltip id={tooltipName} content={opts.tooltipText} disableStyleInjection={true} className="bg-neutral-800 p-2 w-40 border-solid border-2 border-neutral-700 rounded-md"></Tooltip>
+            </button>
+            <Tooltip id={tooltipName} content={opts.tooltipText} disableStyleInjection={true} className="bg-cavernous-25 dark:bg-cavernous-750 p-2 w-40 border-solid border-2 border-cavernous-100 dark:border-cavernous-700 rounded-md shadow-cavernous-300 dark:shadow-cavernous-800 shadow-md"></Tooltip>
         </div>
     )
 }
@@ -77,7 +77,7 @@ export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.
 
     return (<ItemEntry
         name={opts.name} alt={opts.alt} tooltipText={opts.tooltipText} handleClick={handleClick} inner=
-        <dialog id={`${opts.name}-dialog`} style={DIALOG_STYLE} className="bg-neutral-100 dark:bg-neutral-800 rounded-lg">
+        <dialog id={`${opts.name}-dialog`} style={DIALOG_STYLE} className="bg-cavernous-50 dark:bg-cavernous-750 rounded-lg">
             {itemLoaded && opts.inner}
         </dialog>
     />)
@@ -93,7 +93,7 @@ const WasmFrame = (opts: { name: string }) => {
             id={`${opts.name}-iframe`}
             style={I_FRAME_STYLE}
             src={`/static/${opts.name}.html`}
-            className="bg-neutral-100 dark:bg-neutral-800"
+            className="bg-cavernous-25 dark:bg-cavernous-750"
         >
         </iframe>
     );

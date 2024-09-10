@@ -30,7 +30,7 @@ const Table = (param: { className?: string, table: tableProps }) => {
                         <tr key={index}>
                             {row.map((value, index) => {
                                 return (
-                                    <td key={index} className="border border-neutral-500 dark:border-neutral-300 px-4 py-2">{value}</td>
+                                    <td key={index} className="border border-cavernous-300 dark:border-cavernous-300 px-4 py-2">{value}</td>
                                 )
                             })}
                         </tr>

@@ -7,7 +7,7 @@ import Home from './pages/home';
 const Section = (param: { children?: React.ReactNode, className?: string }) => {
 
     let className = (param.className ? param.className : "") + 
-        " row-auto row-start-auto bg-neutral-100 dark:bg-neutral-800 mb-2 sm:mb-4 font-sans text-neutral-900 dark:text-neutral-300 rounded-m shadow-lg dark:shadow-2xl";
+        " row-auto row-start-auto bg-cavernous-25 dark:bg-cavernous-750 mb-2 sm:mb-4 font-sans text-cavernous-700 dark:text-cavernous-50 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950 dark:shadow-md";
     return (
         <div className={className}>
             {param.children}

@@ -16,7 +16,7 @@ const Home = () => {
         <Page>
             <TwoColumn>
                 <div>
-                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" />
+                    <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" className="rounded-md align-middle" />
                 </div>
                 <div>
                     <Markdown>{about}</Markdown>
