@@ -30,7 +30,7 @@ export const ItemEntry = (opts: { name: string, alt: string, handleClick: () => 
 
     return (
         <div>
-            <button onClick={opts.handleClick} data-tooltip-id={tooltipName} className="dark:bg-cavernous-700 bg-cavernous-50 hover:bg-blue hover:text-cavernous-700 m-1 px-2 py-1 rounded-md shadow-md shadow-cavernous-300 dark:shadow-cavernous-800">
+            <button onClick={opts.handleClick} data-tooltip-id={tooltipName} className="dark:bg-cavernous-700 bg-cavernous-50 hover:bg-light_blue hover:text-cavernous-700 m-1 px-2 py-1 rounded-md shadow-md shadow-cavernous-300 dark:shadow-cavernous-800">
                 <img src={`/static/img/${opts.name}-thumbnail.png`} width={75} height={75} alt={opts.alt} className="rounded-md row-span-1" />
                 <div className="row-span-1 text-sm">{title}</div>
                 {opts.inner}
