@@ -40,12 +40,13 @@ export const ItemEntry = (opts: { name: string, alt: string, handleClick: () => 
     )
 }
 
-export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.ReactNode, style: React.CSSProperties, tooltipText?: string }) => {
+export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.ReactNode, style: React.CSSProperties, tooltipText?: string, alert?: string }) => {
     const [itemLoaded, setItemLoaded] = React.useState(false);
 
     const handleClick = () => {
         const dialog = document.getElementById(`${opts.name}-dialog`);
         if (dialog) {
+            alert(opts.alert);
             (dialog as HTMLDialogElement).showModal();
             setItemLoaded(true);
         }
@@ -77,14 +78,15 @@ export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.
 
     return (<ItemEntry
         name={opts.name} alt={opts.alt} tooltipText={opts.tooltipText} handleClick={handleClick} inner=
-        <dialog id={`${opts.name}-dialog`} style={DIALOG_STYLE} className="bg-cavernous-50 dark:bg-cavernous-750 rounded-lg">
+        <dialog id={`${opts.name}-dialog`} style={opts.style} className="bg-cavernous-50 dark:bg-cavernous-750 rounded-lg">
             {itemLoaded && opts.inner}
         </dialog>
     />)
 }
 
-export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string, url?: string }) => {
-    return ItemEntryDialog({ name: opts.name, alt: opts.alt, inner: <WasmFrame name={opts.name} url={opts.url} />, style: DIALOG_STYLE, tooltipText: opts.tooltipText });
+export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string, url?: string, dialogStyle?: React.CSSProperties, alert?: string}) => {
+    const dStyle = opts.dialogStyle ? opts.dialogStyle : DIALOG_STYLE;
+    return ItemEntryDialog({ name: opts.name, alt: opts.alt, inner: <WasmFrame name={opts.name} url={opts.url} />, style: dStyle, tooltipText: opts.tooltipText, alert: opts.alert });
 }
 
 const WasmFrame = (opts: { name: string, url?: string }) => {
