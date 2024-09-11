@@ -19,8 +19,12 @@
               libsoup
               webkitgtk
               llvmPackages.bintools
+              sqlite
           ];
-          shellHook = "exec $SHELL";
+          DATABASE_URL="sqlite:./database.db";
+          shellHook = ''
+              exec $SHELL
+          '';
       };
 
       devShells.aarch64-darwin-linux.default = mpkgs.mkShell {
@@ -29,8 +33,12 @@
             cargo-watch
             libiconv
             darwin.apple_sdk.frameworks.SystemConfiguration 
+            sqlite
           ];
-          shellHook = "exec $SHELL";
+          DATABASE_URL="sqlite:./database.db";
+          shellHook = ''
+              exec $SHELL
+          '';
       };
     };
 }
