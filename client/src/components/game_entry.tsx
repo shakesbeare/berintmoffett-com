@@ -35,7 +35,7 @@ export const ItemEntry = (opts: { name: string, alt: string, handleClick: () => 
                 <div className="row-span-1 text-sm">{title}</div>
                 {opts.inner}
             </button>
-            <Tooltip id={tooltipName} content={opts.tooltipText} disableStyleInjection={true} className="bg-cavernous-25 dark:bg-cavernous-750 p-2 w-40 border-solid border-2 border-cavernous-100 dark:border-cavernous-700 rounded-md shadow-cavernous-300 dark:shadow-cavernous-800 shadow-md"></Tooltip>
+            <Tooltip id={tooltipName} content={opts.tooltipText} disableStyleInjection={true} className="bg-cavernous-25 dark:bg-cavernous-750 p-2 w-72 border-solid border-2 border-cavernous-100 dark:border-cavernous-700 rounded-md shadow-cavernous-300 dark:shadow-cavernous-800 shadow-md"></Tooltip>
         </div>
     )
 }
@@ -83,16 +83,20 @@ export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.
     />)
 }
 
-export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string }) => {
-    return ItemEntryDialog({ name: opts.name, alt: opts.alt, inner: <WasmFrame name={opts.name} />, style: DIALOG_STYLE, tooltipText: opts.tooltipText });
+export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string, url?: string }) => {
+    return ItemEntryDialog({ name: opts.name, alt: opts.alt, inner: <WasmFrame name={opts.name} url={opts.url} />, style: DIALOG_STYLE, tooltipText: opts.tooltipText });
 }
 
-const WasmFrame = (opts: { name: string }) => {
+const WasmFrame = (opts: { name: string, url?: string }) => {
+    let url;
+    if (opts.url) { url = opts.url }
+        else { url = `/static/${opts.name}.html` }
+
     return (
         <iframe
             id={`${opts.name}-iframe`}
             style={I_FRAME_STYLE}
-            src={`/static/${opts.name}.html`}
+            src={url}
             className="bg-cavernous-25 dark:bg-cavernous-750"
         >
         </iframe>

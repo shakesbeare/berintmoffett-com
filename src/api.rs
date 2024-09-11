@@ -1,6 +1,6 @@
 use std::{collections::HashMap, str::FromStr};
 
-use axum::{http::Response, response::IntoResponse, Json};
+use axum::{extract::Path, http::Response, response::IntoResponse, Json};
 use reqwest::Method;
 
 use crate::database::snake::LeaderboardEntry;
@@ -53,12 +53,13 @@ struct Asset {
     browser_download_url: String,
 }
 
-pub async fn snake_update() -> impl IntoResponse {
+pub async fn update_package(Path(package_name): Path<String>) -> impl IntoResponse {
+    let url = format!(
+        "https://api.github.com/repos/shakesbeare/{}/releases/latest",
+        package_name
+    );
     let client = reqwest::Client::new();
-    let url = reqwest::Url::from_str(
-        "https://api.github.com/repos/shakesbeare/rust-snake/releases/latest",
-    )
-    .unwrap();
+    let url = reqwest::Url::from_str(&url).unwrap();
     let request = reqwest::Request::new(Method::GET, url);
     let req = reqwest::RequestBuilder::from_parts(client, request)
         .header("User-Agent", "berintmoffett-com-Updater")
@@ -74,5 +75,6 @@ pub async fn snake_update() -> impl IntoResponse {
     let bytes: Vec<u8> = res.bytes().await.unwrap().into();
     let tar = flate2::read::GzDecoder::new(&bytes as &[u8]);
     let mut archive = tar::Archive::new(tar);
-    archive.unpack("./client/static/wasm/rust-snake").unwrap();
+    let path = format!("./client/static/wasm/{}", package_name);
+    archive.unpack(path).unwrap();
 }
