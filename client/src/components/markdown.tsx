@@ -60,10 +60,6 @@ const Markdown = (param: { children?: string, className?: string }) => {
         </ReactMarkdown>
     );
 
-    for (const child of md.props.children) {
-        console.log(child);
-    }
-
     return md;
 }
 
