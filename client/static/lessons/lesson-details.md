@@ -30,4 +30,5 @@ skill level and age of the student.
 As is standard, I offer a free 30-minute lesson to prospective students to
 make sure it's a good match. Sometimes, it doesn't work out and that's okay!
 The student-teacher relationship is very important for a healthy learning
-environment.
+environment. It's preferable to leave an additional 15-minutes to go over
+policies, so try to plan for a 45-minute meeting, the first time.

@@ -42,10 +42,11 @@ wasted their money.
 
 ### Location
 
-I typically teach at either my home or at the College of Idaho, depending on my
-schedule. If I have to travel to a lesson, I charge an extra $5 for the lesson.
-The extra cost helps me cover gas but also allows me the freedom to block a
-larger portion of my schedule on either side of the lesson for travel time.
+I typically teach at either my home in Kuna or at the student's home, depending
+on my schedule. If I have to travel to a lesson, I charge the 2024
+IRS-recommended rate of $0.67 per mile per lesson, up to a maximum of $14 per
+lesson. Since I live far away from most people, I try to keep the base cost of
+lessons low to not make cost prohibitive. 
 
 ## Contact
 
