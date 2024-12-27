@@ -46,7 +46,7 @@ export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.
     const handleClick = () => {
         const dialog = document.getElementById(`${opts.name}-dialog`);
         if (dialog) {
-            alert(opts.alert);
+            if (opts.alert) { alert(opts.alert) }
             (dialog as HTMLDialogElement).showModal();
             setItemLoaded(true);
         }
@@ -84,7 +84,7 @@ export const ItemEntryDialog = (opts: { name: string, alt: string, inner: React.
     />)
 }
 
-export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string, url?: string, dialogStyle?: React.CSSProperties, alert?: string}) => {
+export const GameEntry = (opts: { name: string, alt: string, tooltipText?: string, url?: string, dialogStyle?: React.CSSProperties, alert?: string }) => {
     const dStyle = opts.dialogStyle ? opts.dialogStyle : DIALOG_STYLE;
     return ItemEntryDialog({ name: opts.name, alt: opts.alt, inner: <WasmFrame name={opts.name} url={opts.url} />, style: dStyle, tooltipText: opts.tooltipText, alert: opts.alert });
 }
@@ -92,7 +92,7 @@ export const GameEntry = (opts: { name: string, alt: string, tooltipText?: strin
 const WasmFrame = (opts: { name: string, url?: string }) => {
     let url;
     if (opts.url) { url = opts.url }
-        else { url = `/static/${opts.name}.html` }
+    else { url = `/static/${opts.name}.html` }
 
     return (
         <iframe

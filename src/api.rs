@@ -54,6 +54,7 @@ struct Asset {
 }
 
 pub async fn update_package(Path(package_name): Path<String>) -> impl IntoResponse {
+    tracing::debug!("Attempting to update package `{}`", package_name);
     let url = format!(
         "https://api.github.com/repos/shakesbeare/{}/releases/latest",
         package_name

@@ -55,6 +55,7 @@ async fn main() -> Result<()> {
 }
 
 async fn root() -> Html<String> {
+    tracing::info!("ROOT");
     let path = std::path::PathBuf::from(STATIC_DIR).join("index.html");
     std::fs::read_to_string(path).unwrap().into()
 }
