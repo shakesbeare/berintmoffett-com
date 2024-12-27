@@ -8,7 +8,7 @@
 
 <body style="overflow: hidden">
     <script type='module'>
-        import init from './wasm/shake_chess/shake_chess.js';
+        import init from './wasm/shake-chess/shake-chess.js';
         init().catch((error) => {
             if (!error.message.startsWith("Using exceptions for control flow,")) {
                 throw error;
