@@ -147,7 +147,7 @@ pub async fn static_file(Path(uri): Path<String>) -> impl IntoResponse {
     let extension = path.extension().unwrap().to_str().unwrap();
 
     let content_type =
-        ContentType::from_ext(extension).unwrap_or({ ContentType::NotFound });
+        ContentType::from_ext(extension).unwrap_or(ContentType::NotFound);
 
     tracing::info!("Serving file: {:?} {:?}", path, content_type);
 

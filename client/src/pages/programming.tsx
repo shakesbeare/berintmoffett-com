@@ -1,6 +1,7 @@
 import React from 'react';
 import Page from './page';
 import { ItemGrid, ItemEntry, GameEntry } from '../components/game_entry';
+import { useNavigate } from 'react-router-dom';
 
 const MICRO_DIABLO_STYLE = {
     width: '1298px', // something is adding 8px of padding... weird
@@ -10,6 +11,7 @@ const MICRO_DIABLO_STYLE = {
 
 
 const Programming = () => {
+    const navigate = useNavigate();
     return (
         <Page>
             <ItemGrid>
@@ -23,7 +25,7 @@ RIGHT-CLICK to issue move commands
 HOLD-SHIFT to queue actions
 
 When the Godot logo disappears, the game is loaded!`} />
-                <ItemEntry name="Merchant Gen" alt="Merchant Inventory Generator" tooltipText="Generate random merchant inventories for Pathfinder 2e." handleClick={() => { window.open('/merchant-gen') }} inner={null} />        
+                <ItemEntry name="merchant" alt="Merchant Inventory Generator" tooltipText="Generate random merchant inventories for Pathfinder 2e." handleClick={() => { navigate('/merchant-gen') }} inner={null} />        
             </ItemGrid>
     </Page>
     )
