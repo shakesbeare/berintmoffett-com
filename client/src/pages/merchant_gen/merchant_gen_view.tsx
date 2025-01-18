@@ -23,7 +23,7 @@ const MerchantGenView = () => {
                     } else {
                         setMarkdown(json.Merchant);
                         const paramId = searchParams.get("id");
-                        if (paramId && paramId != id.toString()) {
+                        if (!paramId || paramId != id.toString()) {
                             navigate(`/merchant-gen/view?id=${id}`);
                         }
                     }
