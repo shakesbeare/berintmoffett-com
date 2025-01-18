@@ -1,11 +1,12 @@
 import React from 'react';
 import Page from './page';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
         <Page>
-            <div>Coming soon...</div>
-        </Page>
+        Coming Soon...
+       </Page>
     )
 }
 

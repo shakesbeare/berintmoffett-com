@@ -2,7 +2,7 @@ import React from 'react';
 
 const Page = (param: {children?: React.ReactNode, className?: string}) => {
     return (
-        <div className="text-xs sm:text-sm md:text-base h-min">
+        <div className="text-base">
             { param.children }
         </div>
     )
