@@ -16,7 +16,7 @@ const Section = (param: { children?: React.ReactNode, className?: string }) => {
 }
 
 const App = () => {
-    const { pathname } = useLocation();
+    const { pathname: location } = useLocation();
     return (
         <React.StrictMode >
             <Section className="min-w-full" >
@@ -31,8 +31,8 @@ const App = () => {
                 </Navbar>
             </Section>
             <div className="flex justify-center">
-                <Section className="sm:w-11/12 md:max-w-5xl px-4 py-2 sm:py-4">
-                    {pathname == '/' ? <Home /> : <Outlet /> }
+                <Section className="sm:w-11/12 md:max-w-5xl w-full px-4 py-2 sm:py-4">
+                    {location == '/' ? <Home /> : <Outlet /> }
                 </Section>
             </div>
         </React.StrictMode>
