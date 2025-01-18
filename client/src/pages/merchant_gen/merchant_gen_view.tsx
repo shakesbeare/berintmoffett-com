@@ -55,7 +55,7 @@ const MerchantGenView = () => {
                 fetchMerchant(id);
             }}>
                 <input name="merchantId" placeholder="6-character ID" defaultValue={id} onChange={(e) => { setId(e.target.value) }} maxLength={6} className="focus:ring-blue w-48 p-1 ring-1 ring-cavernous-600 h-8 bg-cavernous-25 dark:bg-cavernous-750 mb-2 sm:mb-4 font-sans text-cavernous-700 dark:text-cavernous-50 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950 dark:shadow-md focus:outline-none uppercase" />
-                <button type="submit"className = "m-2 h-8 w-16 hover:bg-light_blue hover:text-cavernous-700 bg-cavernous-600 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950" >Search</button>
+                <button type="submit"className = "bg-cavernous-50 ring-1 ring-cavernous-100 hover:ring-0 dark:ring-0 m-2 h-8 w-16 hover:bg-light_blue hover:text-cavernous-700 dark:bg-cavernous-600 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950" >Search</button>
             </form>
             <Markdown>{markdown}</Markdown>
         </Page>

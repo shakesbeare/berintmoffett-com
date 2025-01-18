@@ -30,7 +30,7 @@ const MerchantGenCreate = () => {
                         setLevel(parseInt(e.target.value));
                     }}
                     maxLength={2} pattern="\d*" className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none p-1 w-48 ring-1 ring-cavernous-600 h-8 bg-cavernous-25 dark:bg-cavernous-750 mb-2 sm:mb-4 font-sans text-cavernous-700 dark:text-cavernous-50 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950 dark:shadow-md focus:outline-none uppercase focus:ring-blue text-[16px]" />
-                <button type="submit" className="m-2 h-8 w-16 hover:bg-light_blue hover:text-cavernous-700 bg-cavernous-600 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950" >Create</button>
+                <button type="submit" className="bg-cavernous-50 ring-1 ring-cavernous-100 hover:ring-0 dark:ring-0 m-2 h-8 w-16 hover:bg-light_blue hover:text-cavernous-700 dark:bg-cavernous-600 rounded-md shadow-md shadow-cavernous-100 dark:shadow-cavernous-950" >Create</button>
             </form>
             <Markdown>{message}</Markdown>
         </Page>
