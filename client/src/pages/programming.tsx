@@ -23,8 +23,9 @@ RIGHT-CLICK to issue move commands
 HOLD-SHIFT to queue actions
 
 When the Godot logo disappears, the game is loaded!`} />
+                <ItemEntry name="Merchant Gen" alt="Merchant Inventory Generator" tooltipText="Generate random merchant inventories for Pathfinder 2e." handleClick={() => { window.open('/merchant-gen') }} inner={null} />        
             </ItemGrid>
-        </Page>
+    </Page>
     )
 }
 

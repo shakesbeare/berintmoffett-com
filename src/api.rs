@@ -1,6 +1,7 @@
-use std::{collections::HashMap, str::FromStr};
+use std::str::FromStr;
 
 use axum::{extract::Path, http::Response, response::IntoResponse, Json};
+use merchant_gen_lib::merchant::Merchant;
 use reqwest::Method;
 
 use crate::database::snake::LeaderboardEntry;
@@ -8,6 +9,13 @@ use crate::database::snake::LeaderboardEntry;
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct Highscores {
     highscores: Vec<LeaderboardEntry>,
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
+pub enum MerchantResponse {
+    /// The Markdown representation of a merchant
+    Merchant(String),
+    Failure(String),
 }
 
 pub async fn get_snake_highscores() -> Response<String> {
@@ -78,4 +86,38 @@ pub async fn update_package(Path(package_name): Path<String>) -> impl IntoRespon
     let mut archive = tar::Archive::new(tar);
     let path = format!("./client/static/wasm/{}", package_name);
     archive.unpack(path).unwrap();
+}
+
+pub async fn get_merchant(Path(merchant_id): Path<String>) -> impl IntoResponse {
+    tracing::debug!("Getting merchant {}", merchant_id);
+    let merchant = crate::database::merchant::get_merchant(&merchant_id).await;
+
+    match merchant {
+        Ok(m) => {
+            tracing::debug!("Found Merchant {}", merchant_id);
+            let json = serde_json::to_string(&MerchantResponse::Merchant(m.markdown()))
+                .unwrap();
+            Response::builder()
+                .header("Content-Type", "application/json")
+                .header("Access-Control-Allow-Origin", "*")
+                .body(json)
+                .unwrap()
+        }
+        Err(e) => {
+            tracing::debug!("Failed to get Merchant {}\n{}", merchant_id, e);
+            let json = serde_json::to_string(&MerchantResponse::Failure(e.to_string()))
+                .unwrap();
+            Response::builder()
+                .header("Content-Type", "application/json")
+                .header("Access-Control-Allow-Origin", "*")
+                .body(json)
+                .unwrap()
+        }
+    }
+}
+
+#[axum::debug_handler]
+pub async fn create_merchant(Path(level): Path<i32>) -> String {
+    crate::database::merchant::new_merchant(Merchant::by_level(level))
+        .await.unwrap()
 }

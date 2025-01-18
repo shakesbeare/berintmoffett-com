@@ -43,6 +43,8 @@ async fn main() -> Result<()> {
         )
         .route("/api/snake-leaderboard", get(berintmoffett_com::api::snake_leaderboard))
         .route("/api/update-package/:package_name", post(berintmoffett_com::api::update_package))
+        .route("/api/get-p2e-merchant/:merchant_id", get(berintmoffett_com::api::get_merchant))
+        .route("/api/create-p2e-merchant/:merchant_level", get(berintmoffett_com::api::create_merchant))
         .route("/", get(root))
         .route("/*key", get(root));
 

@@ -1,3 +1,4 @@
+pub mod merchant;
 pub mod snake;
 
 use anyhow::Result;
@@ -31,7 +32,10 @@ pub async fn init() -> Result<()> {
         }
     };
 
-    ensure_tables(&pool).await.expect("Failed to ensure tables exist");
+    ensure_tables(&pool)
+        .await
+        .expect("Failed to ensure tables exist");
+    merchant_gen_lib::database::ensure_tables(&pool).await?;
     POOL.set(Arc::new(pool)).expect("Failed to set DB POOL");
 
     if is_table_empty("snake_leaderboard").await? {
@@ -45,6 +49,22 @@ pub async fn init() -> Result<()> {
                    ('ddd', 0),
                    ('eee', 0)
             "#,
+        )
+        .execute(pool)
+        .await?;
+    }
+
+    if is_table_empty("equipment").await? {
+        let pool = POOL.get().expect("Failed to acquire DB POOL").as_ref();
+        merchant_gen_lib::database::populate_tables(pool).await?;
+    }
+
+    if is_table_empty("p2e_merchants_id").await? {
+        let pool = POOL.get().expect("Failed to acquire DB POOL").as_ref();
+        sqlx::query(
+            "
+        INSERT INTO p2e_merchants_id ( id ) VALUES ( 'AAAAAA' );
+            ",
         )
         .execute(pool)
         .await?;
@@ -93,6 +113,15 @@ pub async fn ensure_tables(pool: &Pool<Sqlite>) -> Result<()> {
             expiry_date INTEGER NOT NULL,
             user INTEGER REFERENCES users
         );
+        
+        CREATE TABLE IF NOT EXISTS p2e_merchants (
+            id TEXT PRIMARY KEY,
+            body TEXT NOT NULL
+        );
+        
+        CREATE TABLE IF NOT EXISTS p2e_merchants_id (
+            id TEXT PRIMARY KEY
+        );
         "#,
     )
     .execute(pool)
@@ -102,7 +131,10 @@ pub async fn ensure_tables(pool: &Pool<Sqlite>) -> Result<()> {
 }
 
 pub async fn is_table_empty(table_name: &str) -> Result<bool> {
-    let pool = POOL.get().expect("Failed to get handle to DB pool").as_ref();
+    let pool = POOL
+        .get()
+        .expect("Failed to get handle to DB pool")
+        .as_ref();
     let result =
         sqlx::query_as::<_, Count>(&format!("SELECT COUNT(*) FROM {}", table_name))
             .fetch_one(pool)
