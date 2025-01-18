@@ -19,7 +19,7 @@ const App = () => {
     const { pathname: location } = useLocation();
     return (
         <React.StrictMode >
-            <Section className="top-0 sticky min-w-full" >
+            <Section className="min-w-full" >
                 <GlobalNavBar minWidth={600} />
             </Section>
             <div className="flex justify-center">
