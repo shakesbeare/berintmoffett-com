@@ -11,9 +11,9 @@ import Contact from './pages/contact';
 import Login from './pages/login';
 import ErrorPage from './pages/error_page';
 import SnakeLeaderboard from './pages/snake_leaderboard';
-import MerchantGenView from './pages/merchant_gen_view';
-import MerchantGenCreate from './pages/merchant_gen_create';
-import MerchantGen from './pages/merchant_gen';
+import MerchantGenView from './pages/merchant_gen/merchant_gen_view';
+import MerchantGenCreate from './pages/merchant_gen/merchant_gen_create';
+import MerchantGen from './pages/merchant_gen/merchant_gen';
 
 const router = createBrowserRouter([
     {
