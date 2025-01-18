@@ -39,6 +39,8 @@ const MerchantGenView = () => {
         if (paramId) {
             setId(paramId);
             fetchMerchant(paramId);
+        } else {
+            setMarkdown("");
         }
         console.log(paramId);
     }, [location, navigate]);
