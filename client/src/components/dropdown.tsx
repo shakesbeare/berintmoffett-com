@@ -10,7 +10,7 @@ export const DropdownItem = (param: { text: string, uri: string, className?: str
 }
 
 export const Dropdown = (param: { children?: React.ReactNode, className?: string }) => {
-    let className = (param.className ? param.className : "") + " w-16 text-2xl px-1 grid grid-flow-col text-center";
+    let className = (param.className ? param.className : "") + " z-40 w-16 text-2xl px-1 grid grid-flow-col text-center";
     const [isOpen, setIsOpen] = React.useState(false);
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -25,12 +25,12 @@ export const Dropdown = (param: { children?: React.ReactNode, className?: string
     return (
         <div className={className}>
             <button ref={ref} onClick={toggleDropdown} className="flex flex-col justify-center items-center shadow-md dark:shadow-cavernous-950 rounded-md bg-cavernous-600 p-2  hover:bg-light_blue hover:text-cavernous-700">
-                <span className={`block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
-                <span className={`block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
-                <span className={`block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
+                <span className={`overflow-auto block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
+                <span className={`overflow-auto block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
+                <span className={`overflow-auto block my-0.5 h-0.5 w-6 bg-cavernous-950`}></span>
             </button>
             {isOpen ? (
-                <div className="my-10 grid grid-flow-row fixed dark:shadow-cavernous-950 rounded-md shadow-md bg-cavernous-750">
+                <div className="z-40 my-10 grid grid-flow-row absolute dark:shadow-cavernous-950 rounded-md shadow-md bg-cavernous-750">
                     {param.children}
                 </div>
             ) : null}

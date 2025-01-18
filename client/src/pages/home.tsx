@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <Page>
             <TwoColumn>
-                <div className="relative inset-0 flex">
+                <div className="relative inset-0 flex z-10">
                     <img src="static/img/bear-portrait.jpg" alt="Bear Moffett" className="rounded-md m-auto" />
                 </div>
                 <div className="relative inset-0 flex">
